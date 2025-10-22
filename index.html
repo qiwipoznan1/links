@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QIWI Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Roboto, sans-serif;
+            background-color: #000000;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: #232323;
+            border-radius: 20px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF2E2E;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            color: white;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: #FF2E2E;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background-color: #232323;
+            color: white;
+            text-decoration: none;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            overflow: hidden;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: #FF2E2E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-highlight {
+            background-color: #FF2E2E;
+        }
+
+        .btn-highlight:hover, .btn-highlight:focus {
+            background-color: #e62727;
+        }
+
+        .app-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background-color: #343434;
+            border-radius: 8px;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            overflow: hidden;
+        }
+
+        .section-divider {
+            height: 1px;
+            background-color: #343434;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            width: 100%;
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .language-btn {
+            background: transparent;
+            border: 1px solid #343434;
+            color: #777;
+            border-radius: 6px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .language-btn:hover {
+            background-color: #343434;
+            color: white;
+        }
+
+        .language-btn.active {
+            background-color: #343434;
+            color: white;
+            border-color: #FF2E2E;
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 22px;
+            }
+            
+            .btn {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+            
+            .logo-placeholder {
+                width: 100px;
+                height: 100px;
+                font-size: 20px;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #f5f5f5;
+                color: #232323;
+            }
+            
+            h2 {
+                color: #232323;
+            }
+            
+            .btn {
+                background-color: #ffffff;
+                color: #232323;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+                border: 1px solid #ebebeb;
+            }
+            
+            .btn:hover, .btn:focus {
+                background-color: #f5f5f5;
+            }
+            
+            .btn-highlight {
+                background-color: #FF2E2E;
+                color: white;
+            }
+            
+            .btn-highlight:hover, .btn-highlight:focus {
+                background-color: #e62727;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo-placeholder">QIWI</div>
+        </div>
+
+        <section id="android">
+            <h2>Android</h2>
+            <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver&hl=pl" class="btn">
+                <div class="app-icon">B</div>
+                Bolt Driver
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver&hl=pl" class="btn">
+                <div class="app-icon">U</div>
+                Uber Driver
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=taxi.android.client" class="btn">
+                <div class="app-icon">F</div>
+                FreeNow
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp&hl=ru" class="btn">
+                <div class="app-icon">Q</div>
+                QIWI App
+            </a>
+        </section>
+
+        <div class="section-divider"></div>
+        
+        <section id="ios">
+            <h2>iOS</h2>
+            <a href="#" class="btn">
+                <div class="app-icon">B</div>
+                Bolt Driver
+            </a>
+            <a href="#" class="btn">
+                <div class="app-icon">U</div>
+                Uber Driver
+            </a>
+            <a href="#" class="btn">
+                <div class="app-icon">F</div>
+                FreeNow
+            </a>
+            <a href="#" class="btn">
+                <div class="app-icon">Q</div>
+                QIWI App
+            </a>
+        </section>
+
+        <div class="language-selector">
+            <button class="language-btn active">EN</button>
+            <button class="language-btn">RU</button>
+            <button class="language-btn">PL</button>
+        </div>
+
+        <footer>
+            <p>© 2024 QIWI</p>
+        </footer>
+    </div>
+
+    <script>
+        // Language selector functionality would go here
+        document.querySelectorAll('.language-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.language-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                // In a real app, this would change the language
+            });
+        });
+    </script>
+</body>
+</html>
