@@ -5,297 +5,313 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QIWI Links</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://qiwipartner.pl/wp-content/uploads/2025/03/qiwi-fawicon.svg" sizes="32x32">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.6/platform.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* Базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Inter', Roboto, sans-serif;
-            background-color: #000000;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+body {
+    font-family: 'Onest', Roboto, sans-serif;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(10px, 3vw, 20px); /* Адаптивный padding */
+}
 
-        .container {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: clamp(10px, 3vw, 20px);
+}
 
-        .logo-container {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: clamp(15px, 4vw, 25px);
+}
 
-        .logo-placeholder {
-            width: 120px;
-            height: 120px;
-            background-color: #232323;
-            border-radius: 20px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FF2E2E;
-            font-weight: bold;
-            font-size: 24px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+.site-logo {
+    height: clamp(60px, 15vw, 100px); /* Адаптивная высота логотипа */
+    width: auto;
+    max-width: 70%;
+    object-fit: contain;
+}
 
-        section {
-            margin-bottom: 30px;
-            width: 100%;
-        }
+/* Заголовки */
+h2 {
+    font-size: clamp(18px, 5vw, 24px); /* Адаптивный размер шрифта */
+    margin-bottom: clamp(15px, 4vw, 20px);
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-align: center;
-            color: white;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+h2::after {
+    content: '';
+    position: absolute;
+    width: clamp(30px, 8vw, 40px);
+    height: 3px;
+    background-color: #FF2E2E;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
 
-        h2::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 3px;
-            background-color: #FF2E2E;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 3px;
-        }
+/* Кнопки */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #232323;
+    color: white;
+    text-decoration: none;
+    padding: clamp(12px, 4vw, 16px) clamp(15px, 5vw, 20px);
+    margin-bottom: clamp(10px, 3vw, 16px);
+    border-radius: clamp(8px, 2vw, 12px);
+    font-size: clamp(14px, 4vw, 16px);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+}
 
-        .btn {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            background-color: #232323;
-            color: white;
-            text-decoration: none;
-            padding: 16px 20px;
-            margin-bottom: 16px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 500;
-            text-align: left;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: none;
-            overflow: hidden;
-        }
+/* Разделитель */
+.section-divider {
+    height: 1px;
+    background-color: #343434;
+    margin: clamp(15px, 4vw, 20px) 0;
+    width: 100%;
+}
 
-        .btn:hover, .btn:focus {
-            background-color: #FF2E2E;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
+/* Секции */
+section {
+    margin-bottom: clamp(15px, 4vw, 30px);
+    width: 100%;
+    transition: opacity 0.3s ease, height 0.3s ease;
+}
 
-        .btn:active {
-            transform: translateY(0);
-        }
+#showAll {
+    width:20%;
+    font-size: clamp(10px, 2vw, 8px);
+    padding: clamp(6px, 2vw, 8px) clamp(6px, 2vw, 10px);
+    align-items: center;
+    justify-content: center;
+}
 
-        .btn-highlight {
-            background-color: #FF2E2E;
-        }
+/* Медиа-запросы для разных размеров экрана */
+@media (max-width: 320px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .btn {
+        padding: 10px 15px;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    h2 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+}
 
-        .btn-highlight:hover, .btn-highlight:focus {
-            background-color: #e62727;
-        }
+@media (min-width: 321px) and (max-width: 375px) {
+    .container {
+        padding: 12px;
+    }
+    
+    .btn {
+        padding: 12px 16px;
+        font-size: 15px;
+    }
+}
 
-        .app-icon {
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            background-color: #343434;
-            border-radius: 8px;
-            margin-right: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
-            overflow: hidden;
-        }
+@media (min-width: 376px) and (max-width: 425px) {
+    .container {
+        padding: 15px;
+    }
+}
 
-        .section-divider {
-            height: 1px;
-            background-color: #343434;
-            margin: 40px 0;
-            width: 100%;
-        }
+/* Для больших экранов */
+@media (min-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .btn {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        background-color: #FF2E2E;
+    }
+}
 
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 12px;
-            color: #777;
-            width: 100%;
-        }
+/* Поддержка светлой темы */
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #f5f5f5;
+        color: #232323;
+    }
+    
+    h2 {
+        color: #232323;
+    }
+    
+    .btn {
+        background-color: #ffffff;
+        color: #232323;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+        border: 1px solid #ebebeb;
+    }
+    
+    .btn:hover {
+        background-color: #FF2E2E;
+        color: white;
+    }
+}
 
-        .language-selector {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            gap: 10px;
-        }
-
-        .language-btn {
-            background: transparent;
-            border: 1px solid #343434;
-            color: #777;
-            border-radius: 6px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .language-btn:hover {
-            background-color: #343434;
-            color: white;
-        }
-
-        .language-btn.active {
-            background-color: #343434;
-            color: white;
-            border-color: #FF2E2E;
-        }
-
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 22px;
-            }
-            
-            .btn {
-                padding: 14px 16px;
-                font-size: 15px;
-            }
-            
-            .logo-placeholder {
-                width: 100px;
-                height: 100px;
-                font-size: 20px;
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            body {
-                background-color: #f5f5f5;
-                color: #232323;
-            }
-            
-            h2 {
-                color: #232323;
-            }
-            
-            .btn {
-                background-color: #ffffff;
-                color: #232323;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-                border: 1px solid #ebebeb;
-            }
-            
-            .btn:hover, .btn:focus {
-                background-color: #f5f5f5;
-            }
-            
-            .btn-highlight {
-                background-color: #FF2E2E;
-                color: white;
-            }
-            
-            .btn-highlight:hover, .btn-highlight:focus {
-                background-color: #e62727;
-            }
-        }
+/* Безопасная область для iPhone X и новее */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(env(safe-area-inset-left), 10px);
+        padding-right: max(env(safe-area-inset-right), 10px);
+        padding-top: max(env(safe-area-inset-top), 10px);
+        padding-bottom: max(env(safe-area-inset-bottom), 10px);
+    }
+}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo-container">
-            <div class="logo-placeholder">QIWI</div>
+            <img src="logo.png" alt="Qiwi" class="site-logo" loading="lazy">
         </div>
 
         <section id="android">
-            <h2>Android</h2>
+            <h2>TAXI</h2>
+            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp&hl=ru" class="btn">
+                QIWI App
+            </a>
             <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver&hl=pl" class="btn">
-                <div class="app-icon">B</div>
                 Bolt Driver
             </a>
             <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver&hl=pl" class="btn">
-                <div class="app-icon">U</div>
                 Uber Driver
             </a>
             <a href="https://play.google.com/store/apps/details?id=taxi.android.client" class="btn">
-                <div class="app-icon">F</div>
                 FreeNow
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp&hl=ru" class="btn">
-                <div class="app-icon">Q</div>
-                QIWI App
             </a>
         </section>
 
-        <div class="section-divider"></div>
+	<div class="section-divider" data-platform-divider></div>
         
         <section id="ios">
             <h2>iOS</h2>
             <a href="#" class="btn">
-                <div class="app-icon">B</div>
+                QIWI App
+            </a>
+            <a href="#" class="btn">
                 Bolt Driver
             </a>
             <a href="#" class="btn">
-                <div class="app-icon">U</div>
                 Uber Driver
             </a>
             <a href="#" class="btn">
-                <div class="app-icon">F</div>
                 FreeNow
             </a>
-            <a href="#" class="btn">
-                <div class="app-icon">Q</div>
-                QIWI App
-            </a>
-        </section>
 
-        <div class="language-selector">
-            <button class="language-btn active">EN</button>
-            <button class="language-btn">RU</button>
-            <button class="language-btn">PL</button>
-        </div>
+        </section>
+	<secrion>
+		<div class="section-divider"></div>
+	    <h2>WERYFIKACJA</h2>
+            <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn">
+                Bolt
+            </a>
+            <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn">
+                Bolt Maps
+            </a>
+            <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn">
+                Uber
+            </a>
+            <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn">
+                Uber Maps
+            </a>
+            <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn">
+                FreeNow
+            </a>
+	    <a href="https://share.google/5FuDPadakYhykCesR" class="btn">
+                FreeNow Maps
+            </a>
+	</section>
+        <button id="showAll" class="btn">All</button>
 
         <footer>
-            <p>© 2024 QIWI</p>
+            <p>© 2025 QIWI</p>
         </footer>
     </div>
 
     <script>
-        // Language selector functionality would go here
-        document.querySelectorAll('.language-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.language-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                this.classList.add('active');
-                // In a real app, this would change the language
-            });
-        });
+function detectDevicePlatform() {
+    const androidSection = document.getElementById('android');
+    const iosSection = document.getElementById('ios');
+    const showAllButton = document.getElementById('showAll');
+    const divider = document.querySelector('[data-platform-divider]');
+    const os = platform.os.family.toLowerCase();
+    
+    function hideSection(section) {
+        section.classList.add('hidden');
+        setTimeout(() => {
+            section.style.display = 'none';
+        }, 300);
+    }
+    
+    if (os.includes('android')) {
+        hideSection(iosSection);
+        divider.style.display = 'none'; // Скрываем разделитель
+        showAllButton.style.display = 'block';
+    } else if (os.includes('ios') || os.includes('mac')) {
+        hideSection(androidSection);
+        divider.style.display = 'none'; // Скрываем разделитель
+        showAllButton.style.display = 'block';
+    }
+    
+    // Показываем разделитель только когда видны обе секции
+    document.getElementById('showAll').addEventListener('click', function() {
+        document.getElementById('android').style.display = 'block';
+        document.getElementById('ios').style.display = 'block';
+        document.getElementById('android').classList.remove('hidden');
+        document.getElementById('ios').classList.remove('hidden');
+        divider.style.display = 'block'; // Показываем разделитель
+        this.style.display = 'none';
+    });
+    
+    document.body.classList.add(os.includes('android') ? 'android-device' : 'ios-device');
+}
+
+// Запускаем после загрузки DOM
+document.addEventListener('DOMContentLoaded', detectDevicePlatform);
     </script>
 </body>
 </html>
