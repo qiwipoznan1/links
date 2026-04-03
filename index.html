@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>QIWI Links</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="https://qiwipartner.pl/wp-content/uploads/2025/03/qiwi-fawicon.svg" sizes="32x32">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.6/platform.min.js"></script>
+    
     <style>
-/* Базовые стили */
+/* Базовые стили и App-like UX */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при тапе */
 }
 
 body {
@@ -24,29 +25,38 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: clamp(10px, 3vw, 20px); /* Адаптивный padding */
+    padding: clamp(10px, 3vw, 20px);
+    position: relative;
+    min-height: 100vh;
+    user-select: none; /* Запрещает случайное выделение текста пальцем */
+    animation: fadeIn 0.4s ease-in-out; /* Плавное появление страницы */
 }
 
-/* Круглые плавающие кнопки сверху */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Круглые плавающие кнопки - теперь FIXED (всегда на экране при скролле) */
 .floating-top-left {
-    position: absolute;
-    top: clamp(15px, 4vw, 20px);
-    left: clamp(15px, 4vw, 20px);
+    position: fixed;
+    top: clamp(10px, 3vw, 15px);
+    left: clamp(10px, 3vw, 15px);
     z-index: 1000;
 }
 
 .floating-top-right {
-    position: absolute;
-    top: clamp(15px, 4vw, 20px);
-    right: clamp(15px, 4vw, 20px);
+    position: fixed;
+    top: clamp(10px, 3vw, 15px);
+    right: clamp(10px, 3vw, 15px);
     display: flex;
-    gap: 12px;
+    gap: 10px;
     z-index: 1000;
 }
 
 .circle-btn {
-    width: clamp(40px, 10vw, 48px);
-    height: clamp(40px, 10vw, 48px);
+    width: clamp(38px, 10vw, 46px);
+    height: clamp(38px, 10vw, 46px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -54,31 +64,25 @@ body {
     text-decoration: none;
     color: white;
     font-size: clamp(18px, 5vw, 22px);
-    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
-.circle-btn:hover {
-    transform: scale(1.1);
+.circle-btn:active {
+    transform: scale(0.95); /* Эффект вдавливания при нажатии */
 }
 
 /* Цвета для кнопок */
 .form-btn { background-color: #FF2E2E; }
-.form-btn:hover { background-color: #ff4c4c; }
-
 .tg-btn { background-color: #0088cc; }
-.tg-btn:hover { background-color: #0099e6; }
-
 .wa-btn { background-color: #25D366; }
-.wa-btn:hover { background-color: #128C7E; }
-
 
 .container {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    /* Увеличен верхний отступ, чтобы логотип не наезжал на кнопки */
-    padding: clamp(60px, 15vw, 80px) clamp(10px, 3vw, 20px) clamp(10px, 3vw, 20px);
+    padding: clamp(10px, 3vw, 20px);
+    padding-top: 40px; /* Доп. отступ чтобы контент не сразу уезжал под иконки */
 }
 
 .logo-container {
@@ -89,7 +93,7 @@ body {
 }
 
 .site-logo {
-    height: clamp(100px, 15vw, 130px); /* Адаптивная высота логотипа */
+    height: clamp(100px, 15vw, 130px);
     width: auto;
     max-width: 70%;
     object-fit: contain;
@@ -97,7 +101,7 @@ body {
 
 /* Заголовки */
 h2 {
-    font-size: clamp(18px, 5vw, 24px); /* Адаптивный размер шрифта */
+    font-size: clamp(18px, 5vw, 22px);
     margin-bottom: clamp(15px, 4vw, 20px);
     font-weight: 600;
     text-align: center;
@@ -130,21 +134,25 @@ h2::after {
     background-color: #232323;
     color: white;
     text-decoration: none;
-    padding: clamp(12px, 4vw, 16px) clamp(15px, 5vw, 20px);
-    margin-bottom: clamp(10px, 3vw, 16px);
-    border-radius: clamp(8px, 2vw, 12px);
-    font-size: clamp(14px, 4vw, 16px);
+    padding: clamp(14px, 4vw, 16px) clamp(15px, 5vw, 20px); /* Сделал чуть выше для удобного тапа */
+    margin-bottom: clamp(10px, 3vw, 14px);
+    border-radius: clamp(10px, 2vw, 14px);
+    font-size: clamp(15px, 4vw, 16px);
     font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
     border: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+    background-color: #333333;
 }
 
 /* Разделитель */
 .section-divider {
     height: 1px;
     background-color: #343434;
-    margin: clamp(15px, 4vw, 20px) 0;
+    margin: clamp(20px, 5vw, 25px) 0;
     width: 100%;
 }
 
@@ -152,71 +160,24 @@ h2::after {
 section {
     margin-bottom: clamp(15px, 4vw, 30px);
     width: 100%;
-    transition: opacity 0.3s ease, height 0.3s ease;
 }
 
 #showAll {
-    width:20%;
-    font-size: clamp(10px, 2vw, 8px);
-    padding: clamp(6px, 2vw, 8px) clamp(6px, 2vw, 10px);
-    align-items: center;
-    justify-content: center;
+    width: 30%;
+    font-size: clamp(12px, 3vw, 14px);
+    padding: 10px;
+    margin: 0 auto;
+    display: none; /* Скрыто по умолчанию */
 }
 
-/* Медиа-запросы для разных размеров экрана */
-@media (max-width: 320px) {
-    .container {
-        padding: 60px 8px 8px;
-    }
-    
-    .btn {
-        padding: 10px 15px;
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-    
-    h2 {
-        font-size: 16px;
-        margin-bottom: 12px;
-    }
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 12px;
 }
 
-@media (min-width: 321px) and (max-width: 375px) {
-    .container {
-        padding: 65px 12px 12px;
-    }
-    
-    .btn {
-        padding: 12px 16px;
-        font-size: 15px;
-    }
-}
-
-@media (min-width: 376px) and (max-width: 425px) {
-    .container {
-        padding: 70px 15px 15px;
-    }
-}
-
-/* Для больших экранов */
-@media (min-width: 768px) {
-    .container {
-        padding: 80px 20px 20px;
-    }
-    
-    .btn {
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .btn:hover {
-        transform: translateY(-2px);
-        background-color: #FF2E2E;
-    }
-}
-
-/* Безопасная область для iPhone X и новее */
+/* Безопасная область для iPhone */
 @supports (padding: max(0px)) {
     body {
         padding-left: max(env(safe-area-inset-left), 10px);
@@ -251,119 +212,60 @@ section {
 
         <section id="android">
             <h2>TAXI</h2>
-            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">
-                QIWI App
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver" class="btn">
-                Bolt Driver
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">
-                Uber Driver
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=taxi.android.driver" class="btn">
-                FreeNow
-            </a>
-        <div class="section-divider"></div>
+            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">QIWI App</a>
+            <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver" class="btn">Bolt Driver</a>
+            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">Uber Driver</a>
+            <a href="https://play.google.com/store/apps/details?id=taxi.android.driver" class="btn">FreeNow</a>
+            
+            <div class="section-divider"></div>
+            
             <h2>DELIVERY</h2>
-            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">
-                QIWI App
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">
-                Uber Driver
-            </a>
-            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">
-                Bolt Food Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.bolt.deliverycourier" class="btn">
-                Bolt Food Courier
-            </a>
-            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">
-                Glovo Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.logistics.rider.glovo" class="btn">
-                Glovo Rider
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.wolt.courierapp" class="btn">
-                Wolt
-            </a>
-            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">
-                Stuart Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.stuart.courier" class="btn">
-                Stuart
-            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">QIWI App</a>
+            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">Uber Driver</a>
+            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">Bolt Food Registration</a>
+            <a href="https://play.google.com/store/apps/details?id=com.bolt.deliverycourier" class="btn">Bolt Food Courier</a>
+            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">Glovo Registration</a>
+            <a href="https://play.google.com/store/apps/details?id=com.logistics.rider.glovo" class="btn">Glovo Rider</a>
+            <a href="https://play.google.com/store/apps/details?id=com.wolt.courierapp" class="btn">Wolt</a>
+            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">Stuart Registration</a>
+            <a href="https://play.google.com/store/apps/details?id=com.stuart.courier" class="btn">Stuart</a>
         </section>
 
-    <div class="section-divider" data-platform-divider></div>
+        <div class="section-divider" data-platform-divider></div>
         
         <section id="ios">
             <h2>iOS</h2>
-            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">
-                QIWI App
-            </a>
-            <a href="https://apps.apple.com/pl/app/bolt-driver-drive-earn/id897442736?l=pl" class="btn">
-                Bolt Driver
-            </a>
-            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">
-                Uber Driver
-            </a>
-            <a href="https://apps.apple.com/pl/app/freenow-for-drivers/id1474084363" class="btn">
-                FreeNow
-            </a>
-                <div class="section-divider"></div>
+            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">QIWI App</a>
+            <a href="https://apps.apple.com/pl/app/bolt-driver-drive-earn/id897442736?l=pl" class="btn">Bolt Driver</a>
+            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">Uber Driver</a>
+            <a href="https://apps.apple.com/pl/app/freenow-for-drivers/id1474084363" class="btn">FreeNow</a>
+            
+            <div class="section-divider"></div>
+            
             <h2>DELIVERY</h2>
-            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">
-                QIWI App
-            </a>
-            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">
-                Uber Driver
-            </a>
-            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">
-                Bolt Food Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/bolt-food-courier/id1470629849" class="btn">
-                Bolt Food Courier
-            </a>
-            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">
-                Glovo Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/glovo-rider-for-couriers/id6482290018" class="btn">
-                Glovo Rider
-            </a>
-            <a href="https://apps.apple.com/us/app/wolt-courier-partner/id1477299281" class="btn">
-                Wolt
-            </a>
-            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">
-                Stuart Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/kurierzy-stuart/id1623394133" class="btn">
-                Stuart
-            </a>
+            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">QIWI App</a>
+            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">Uber Driver</a>
+            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">Bolt Food Registration</a>
+            <a href="https://apps.apple.com/pl/app/bolt-food-courier/id1470629849" class="btn">Bolt Food Courier</a>
+            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">Glovo Registration</a>
+            <a href="https://apps.apple.com/pl/app/glovo-rider-for-couriers/id6482290018" class="btn">Glovo Rider</a>
+            <a href="https://apps.apple.com/us/app/wolt-courier-partner/id1477299281" class="btn">Wolt</a>
+            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">Stuart Registration</a>
+            <a href="https://apps.apple.com/pl/app/kurierzy-stuart/id1623394133" class="btn">Stuart</a>
         </section>
-    <section>
-        <div class="section-divider"></div>
-        <h2>WERYFIKACJA</h2>
-            <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn">
-                Bolt
-            </a>
-            <a href="https://maps.app.goo.gl/QNipNR8bxNuMhDVV9" class="btn">
-                Bolt Maps
-            </a>
-            <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn">
-                Uber
-            </a>
-            <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn">
-                Uber Maps
-            </a>
-            <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn">
-                FreeNow
-            </a>
-        <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn">
-                FreeNow Maps
-            </a>
-    </section>
 
-        <button id="showAll" class="btn">All</button>
+        <section>
+            <div class="section-divider"></div>
+            <h2>WERYFIKACJA</h2>
+            <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn">Bolt</a>
+            <a href="https://maps.app.goo.gl/QNipNR8bxNuMhDVV9" class="btn">Bolt Maps</a>
+            <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn">Uber</a>
+            <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn">Uber Maps</a>
+            <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn">FreeNow</a>
+            <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn">FreeNow Maps</a>
+        </section>
+
+        <button id="showAll" class="btn">Show All</button>
 
         <footer>
             <p>© 2025 QIWI</p>
@@ -371,46 +273,51 @@ section {
     </div>
 
     <script>
-function detectDevicePlatform() {
-    const androidSection = document.getElementById('android');
-    const iosSection = document.getElementById('ios');
-    const showAllButton = document.getElementById('showAll');
-    const divider = document.querySelector('[data-platform-divider]');
-    const os = platform.os.family.toLowerCase();
-    
-    function hideSection(section) {
-        section.classList.add('hidden');
-        setTimeout(() => {
-            section.style.display = 'none';
-        }, 300);
-    }
-    
-    if (os.includes('android')) {
-        hideSection(iosSection);
-        divider.style.display = 'none'; // Скрываем разделитель
-        showAllButton.style.display = 'block';
-    } else if (os.includes('ios') || os.includes('mac')) {
-        hideSection(androidSection);
-        divider.style.display = 'none'; // Скрываем разделитель
-        showAllButton.style.display = 'block';
-    }
-    
-    // Показываем разделитель только когда видны обе секции
-    document.getElementById('showAll').addEventListener('click', function() {
-        document.getElementById('android').style.display = 'block';
-        document.getElementById('ios').style.display = 'block';
-        document.getElementById('android').classList.remove('hidden');
-        document.getElementById('ios').classList.remove('hidden');
-        divider.style.display = 'block'; // Показываем разделитель
-        this.style.display = 'none';
-    });
-    
-    document.body.classList.add(os.includes('android') ? 'android-device' : 'ios-device');
-}
+    function initApp() {
+        const androidSection = document.getElementById('android');
+        const iosSection = document.getElementById('ios');
+        const showAllButton = document.getElementById('showAll');
+        const divider = document.querySelector('[data-platform-divider]');
+        
+        // Быстрое и легкое определение ОС без сторонних скриптов
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+        const isAndroid = /android/i.test(userAgent);
 
-// Запускаем после загрузки DOM
-document.addEventListener('DOMContentLoaded', detectDevicePlatform);
+        function hideSection(section) {
+            section.style.display = 'none';
+        }
+        
+        if (isAndroid) {
+            hideSection(iosSection);
+            divider.style.display = 'none';
+            showAllButton.style.display = 'flex';
+        } else if (isIOS) {
+            hideSection(androidSection);
+            divider.style.display = 'none';
+            showAllButton.style.display = 'flex';
+        }
+        
+        // Кнопка "Показать всё"
+        showAllButton.addEventListener('click', function() {
+            androidSection.style.display = 'block';
+            iosSection.style.display = 'block';
+            divider.style.display = 'block';
+            this.style.display = 'none';
+            // Вибрация при нажатии
+            if (navigator.vibrate) navigator.vibrate(50);
+        });
+
+        // Добавляем легкую вибрацию на все ссылки (для Android)
+        const allLinks = document.querySelectorAll('a.btn, a.circle-btn');
+        allLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navigator.vibrate) navigator.vibrate(40);
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-
 </html>
