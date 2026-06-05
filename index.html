@@ -88,12 +88,11 @@ footer {
 }
 .accordion-content.open { opacity: 1; margin-top: 8px; margin-bottom: 4px; }
 
-/* ================= ОБНОВЛЕННЫЙ ПЛАВНЫЙ POPUP (iOS-STYLE ANIMATION) ================= */
+/* ================= POPUP И ПОШАГОВАЯ ФОРМА ================= */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
     z-index: 2000; display: flex; justify-content: center; align-items: center;
-    /* Управление плавным скрытием и появлением всего оверлея */
     opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -103,18 +102,31 @@ footer {
     background: #111; padding: 25px; border-radius: 20px;
     width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto;
     position: relative; border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Эффект легкого масштабирования и вылета вверх/вниз */
     transform: scale(0.92) translateY(20px); opacity: 0;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .modal-overlay.active .modal-content { transform: scale(1) translateY(0); opacity: 1; }
 
-.close-btn {
-    position: absolute; top: 15px; right: 15px; width: 30px; height: 30px;
-    background: #222; border: none; color: #fff; border-radius: 50%;
+.modal-header { display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 15px; }
+.modal-title { font-size: 18px; font-weight: 600; text-align: center; margin: 0; }
+
+.close-btn, .back-btn {
+    position: absolute; top: -5px; width: 30px; height: 30px;
+    background: transparent; border: none; color: #fff; border-radius: 50%;
     font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
-.modal-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+.close-btn { right: -5px; background: #222; }
+.back-btn { left: -5px; display: none; font-size: 16px; color: #FF2E2E; }
+
+/* Индикатор шагов */
+.step-indicator { display: flex; justify-content: center; gap: 6px; margin-bottom: 20px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #333; transition: 0.3s ease; }
+.dot.active { background: #FF2E2E; width: 18px; border-radius: 4px; }
+
+/* Анимация переключения шагов */
+.step-container { animation: slideIn 0.3s ease; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
 .form-group { margin-bottom: 12px; position: relative; }
 .form-control {
     width: 100%; padding: 14px 15px; border-radius: 12px; border: 1px solid #333;
@@ -122,7 +134,6 @@ footer {
     transition: border-color 0.3s ease;
 }
 .form-control::placeholder { color: #888; }
-
 .form-control:focus { border-color: #777; }
 .form-control.valid { border-color: #25D366; }
 .form-control.invalid { border-color: #FF2E2E; }
@@ -141,18 +152,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 <body>
 
     <div class="floating-top-right">
-        <a href="https://t.me/qiwipoznan" class="circle-btn tg-btn" target="_blank">
-            <i class="fa-brands fa-telegram"></i>
-        </a>
-        <a href="https://wa.me/48504407148" class="circle-btn wa-btn" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+        <a href="https://t.me/qiwipoznan" class="circle-btn tg-btn" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://wa.me/48504407148" class="circle-btn wa-btn" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
 
     <div class="container">
-        <div class="logo-container">
-            <img src="logo.png" alt="Qiwi" class="site-logo" loading="lazy">
-        </div>
+        <div class="logo-container"><img src="logo.png" alt="Qiwi" class="site-logo" loading="lazy"></div>
 
         <button id="openFormBtn" class="btn btn-main-cta">
             <i class="fa-solid fa-file-signature"></i> <span data-i18n="applyBtn">REGISTER</span>
@@ -160,9 +165,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
         <section id="android">
             <div class="accordion-item">
-                <div class="accordion-header">
-                    <span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                <div class="accordion-header"><span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i></div>
                 <div class="accordion-content">
                     <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver</a>
@@ -170,11 +173,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                     <a href="https://play.google.com/store/apps/details?id=taxi.android.driver" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
                 </div>
             </div>
-            
             <div class="accordion-item">
-                <div class="accordion-header">
-                    <span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                <div class="accordion-header"><span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i></div>
                 <div class="accordion-content">
                     <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
@@ -191,9 +191,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         
         <section id="ios">
             <div class="accordion-item">
-                <div class="accordion-header">
-                    <span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                <div class="accordion-header"><span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i></div>
                 <div class="accordion-content">
                     <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://apps.apple.com/pl/app/bolt-driver-drive-earn/id897442736?l=pl" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver</a>
@@ -201,11 +199,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                     <a href="https://apps.apple.com/pl/app/freenow-for-drivers/id1474084363" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
                 </div>
             </div>
-            
             <div class="accordion-item">
-                <div class="accordion-header">
-                    <span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                <div class="accordion-header"><span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i></div>
                 <div class="accordion-content">
                     <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
@@ -222,16 +217,14 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
         <section style="margin-top: 12px;">
             <div class="accordion-item">
-                <div class="accordion-header">
-                    <span data-i18n="verification">VERIFICATION</span> <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                <div class="accordion-header"><span data-i18n="verification">VERIFICATION</span> <i class="fa-solid fa-chevron-down"></i></div>
                 <div class="accordion-content">
                     <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt</a>
                     <a href="https://maps.app.goo.gl/QNipNR8bxNuMhDVV9" class="btn"><img src="icon-bolt.png" alt="Bolt Maps" class="app-icon"> Bolt Maps</a>
                     <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber</a>
                     <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn"><img src="icon-uber.png" alt="Uber Maps" class="app-icon"> Uber Maps</a>
                     <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
-                    <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
+                    <a href="https://maps.app.goo.gl/qJXkhcs9A8DVip34A" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
                 </div>
             </div>
         </section>
@@ -239,30 +232,49 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         <button id="showAll" class="btn" style="display: none;" data-i18n="showAll">Show All Platforms</button>
     </div>
 
+    <!-- МОДАЛЬНОЕ ОКНО ПОШАГОВОЙ ФОРМЫ -->
     <div class="modal-overlay" id="formModal">
         <div class="modal-content">
-            <button class="close-btn" id="closeFormBtn"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal-title" data-i18n="formTitle">Registration</h3>
+            
+            <div class="modal-header">
+                <button type="button" class="back-btn" id="backStepBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <h3 class="modal-title" data-i18n="formTitle">Registration</h3>
+                <button type="button" class="close-btn" id="closeFormBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Индикатор шагов -->
+            <div class="step-indicator" id="stepIndicator">
+                <div class="dot active" id="dot1"></div>
+                <div class="dot" id="dot2"></div>
+            </div>
             
             <form id="registrationForm" novalidate>
                 <input type="text" name="botField" id="botField" class="hidden-honeypot" tabindex="-1" autocomplete="off">
                 
-                <div class="form-group"><input type="text" id="fName" class="form-control" required></div>
-                <div class="form-group"><input type="tel" id="fPhone" class="form-control" required></div>
-                <div class="form-group"><input type="email" id="fEmail" class="form-control" required></div>
-                <div class="form-group"><input type="text" id="fPassport" class="form-control" required></div>
-                
-                <div class="form-group"><input type="text" id="fExpiry" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" required></div>
-                
-                <div class="form-group"><input type="text" id="fAccount" class="form-control" required></div>
-                <div class="form-group"><input type="text" id="fCity" class="form-control" required></div>
-                <div class="form-group"><input type="text" id="fStreet" class="form-control" required></div>
-                <div class="form-group"><input type="text" id="fHouse" class="form-control" required></div>
-                <div class="form-group"><input type="text" id="fZip" class="form-control" required></div>
-                
-                <button type="submit" id="submitBtn" class="btn btn-main-cta" style="margin-bottom: 0; width: 100%; border-radius: 12px;" data-i18n="fSubmit">SUBMIT</button>
+                <!-- ШАГ 1: Личные данные -->
+                <div id="step1Container" class="step-container">
+                    <div class="form-group"><input type="text" id="fName" class="form-control" required></div>
+                    <div class="form-group"><input type="tel" id="fPhone" class="form-control" required></div>
+                    <div class="form-group"><input type="email" id="fEmail" class="form-control" required></div>
+                    <div class="form-group"><input type="text" id="fPassport" class="form-control" required></div>
+                    <div class="form-group"><input type="text" id="fExpiry" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" required></div>
+                    
+                    <button type="button" id="nextStepBtn" class="btn btn-main-cta" style="margin-bottom: 0; width: 100%; border-radius: 12px;" data-i18n="btnNext">NEXT</button>
+                </div>
+
+                <!-- ШАГ 2: Финансы и адрес -->
+                <div id="step2Container" class="step-container" style="display: none;">
+                    <div class="form-group"><input type="text" id="fAccount" class="form-control" required></div>
+                    <div class="form-group"><input type="text" id="fCity" class="form-control" required></div>
+                    <div class="form-group"><input type="text" id="fStreet" class="form-control" required></div>
+                    <div class="form-group"><input type="text" id="fHouse" class="form-control" required></div>
+                    <div class="form-group"><input type="text" id="fZip" class="form-control" required></div>
+                    
+                    <button type="submit" id="submitBtn" class="btn btn-main-cta" style="margin-bottom: 0; width: 100%; border-radius: 12px;" data-i18n="fSubmit">SUBMIT</button>
+                </div>
             </form>
             
+            <!-- Экран успеха -->
             <div id="successScreen">
                 <i class="fa-solid fa-circle-check"></i>
                 <h3 data-i18n="successMsg">✓ Application submitted!</h3>
@@ -270,16 +282,14 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         </div>
     </div>
 
-    <footer>
-        <p>© 2026 QIWI Partner</p>
-    </footer>
+    <footer><p>© 2026 QIWI Partner</p></footer>
 
     <script>
     const dict = {
-        en: { applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", formTitle: "Registration Form", fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT APPLICATION", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
-        ru: { applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", formTitle: "Анкета водителя", fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ ЗАЯВКУ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
-        pl: { applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / paszportu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
-        uk: { applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", formTitle: "Реєстраційна форма", fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ ЗАЯВКУ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
+        en: { btnNext: "NEXT", applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", formTitle: "Registration Form", fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT APPLICATION", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
+        ru: { btnNext: "ДАЛЕЕ", applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", formTitle: "Анкета водителя", fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ ЗАЯВКУ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
+        pl: { btnNext: "DALEJ", applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / paszportu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
+        uk: { btnNext: "ДАЛІ", applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", formTitle: "Реєстраційна форма", fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ ЗАЯВКУ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
     };
 
     function initApp() {
@@ -293,9 +303,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             if (t[el.getAttribute('data-i18n')]) el.innerText = t[el.getAttribute('data-i18n')];
         });
 
-        // Порядок элементов в массиве изменен в соответствии с визуальным расположением
-        const inputs = ['fName', 'fPhone', 'fEmail', 'fPassport', 'fExpiry', 'fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip'];
-        inputs.forEach(id => {
+        // Списки полей разбиты по шагам
+        const step1Inputs = ['fName', 'fPhone', 'fEmail', 'fPassport', 'fExpiry'];
+        const step2Inputs = ['fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip'];
+        const allInputs = [...step1Inputs, ...step2Inputs];
+
+        allInputs.forEach(id => {
             const input = document.getElementById(id);
             if (input && t[id]) input.placeholder = t[id];
         });
@@ -306,7 +319,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         if (isAndroid) { document.getElementById('ios').style.display = 'none'; }
         else if (isIOS) { document.getElementById('android').style.display = 'none'; }
 
-        // ЛОГИКА РАСКРЫВАЕМЫХ КАТЕГОРИЙ (АККОРДЕОН)
+        // АККОРДЕОНЫ
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', function() {
                 const content = this.nextElementSibling;
@@ -316,24 +329,22 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             });
         });
 
-        // МАСКИ ВВОДА И ВАЛИДАЦИЯ
-        const fAccount = document.getElementById('fAccount');
-        fAccount.addEventListener('input', function() {
+        // МАСКИ ВВОДА
+        document.getElementById('fAccount').addEventListener('input', function() {
             let val = this.value.replace(/[^\dA-Z]/gi, '').toUpperCase();
             if (val.length > 2) { val = val.substring(0, 2) + ' ' + val.substring(2).match(/.{1,4}/g)?.join(' '); }
             this.value = val ? val.trim() : '';
             validateField(this);
         });
 
-        const fZip = document.getElementById('fZip');
-        fZip.addEventListener('input', function() {
+        document.getElementById('fZip').addEventListener('input', function() {
             let val = this.value.replace(/\D/g, '');
             if (val.length > 2) { val = val.substring(0, 2) + '-' + val.substring(2, 5); }
             this.value = val;
             validateField(this);
         });
 
-        inputs.forEach(id => {
+        allInputs.forEach(id => {
             const input = document.getElementById(id);
             if(id !== 'fAccount' && id !== 'fZip') {
                 input.addEventListener('input', function() { validateField(this); });
@@ -366,29 +377,82 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             return isValid;
         }
 
-        // ОТПРАВКА И МОДАЛЬНОЕ ОКНО
+        // ================= ПОШАГОВАЯ ЛОГИКА И POPUP =================
         const modal = document.getElementById('formModal');
         const form = document.getElementById('registrationForm');
-        const submitBtn = document.getElementById('submitBtn');
         const successScreen = document.getElementById('successScreen');
+        
+        const step1 = document.getElementById('step1Container');
+        const step2 = document.getElementById('step2Container');
+        const nextBtn = document.getElementById('nextStepBtn');
+        const backBtn = document.getElementById('backStepBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const indicator = document.getElementById('stepIndicator');
 
-        // Плавное открытие/закрытие завязано на класс .active в CSS (opacity + visibility)
-        document.getElementById('openFormBtn').addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
-        document.getElementById('closeFormBtn').addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = ''; });
-        modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } });
+        // Функция переключения шагов
+        function goToStep(stepNum) {
+            if (stepNum === 1) {
+                step2.style.display = 'none';
+                step1.style.display = 'block';
+                backBtn.style.display = 'none';
+                document.getElementById('dot1').classList.add('active');
+                document.getElementById('dot2').classList.remove('active');
+            } else {
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                backBtn.style.display = 'flex';
+                document.getElementById('dot1').classList.remove('active');
+                document.getElementById('dot2').classList.add('active');
+            }
+        }
 
+        // Кнопка "ДАЛЕЕ" (Проверка Шага 1)
+        nextBtn.addEventListener('click', () => {
+            let isStep1Valid = true;
+            step1Inputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (!validateField(input)) { input.classList.add('invalid'); isStep1Valid = false; }
+            });
+
+            if (isStep1Valid) {
+                if (navigator.vibrate) navigator.vibrate(20);
+                goToStep(2);
+            } else {
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            }
+        });
+
+        // Кнопка "НАЗАД"
+        backBtn.addEventListener('click', () => {
+            if (navigator.vibrate) navigator.vibrate(20);
+            goToStep(1);
+        });
+
+        // Открытие / Закрытие окна
+        document.getElementById('openFormBtn').addEventListener('click', () => { 
+            modal.classList.add('active'); document.body.style.overflow = 'hidden'; 
+        });
+        document.getElementById('closeFormBtn').addEventListener('click', () => { 
+            modal.classList.remove('active'); document.body.style.overflow = ''; 
+        });
+        modal.addEventListener('click', (e) => { 
+            if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } 
+        });
+
+        // ОТПРАВКА ДАННЫХ (Замените ссылку!)
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzcPQiKxO4NzhAM3b9sd6xlxNqq2a9CSmpVTg-cUfZ5xF4AGkIMXXk8PkkqiNjG_q9I-A/exec';
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            let allValid = true;
-            inputs.forEach(id => {
+            // Проверка Шага 2 перед отправкой
+            let isStep2Valid = true;
+            step2Inputs.forEach(id => {
                 const input = document.getElementById(id);
-                if (!validateField(input)) { input.classList.add('invalid'); allValid = false; }
+                if (!validateField(input)) { input.classList.add('invalid'); isStep2Valid = false; }
             });
 
-            if (!allValid) {
+            if (!isStep2Valid) {
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
                 return;
             }
@@ -401,7 +465,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 phone: document.getElementById('fPhone').value,
                 email: document.getElementById('fEmail').value,
                 passport: document.getElementById('fPassport').value,
-                expiry: document.getElementById('fExpiry').value, // Передаем корректно
+                expiry: document.getElementById('fExpiry').value,
                 account: document.getElementById('fAccount').value,
                 city: document.getElementById('fCity').value,
                 street: document.getElementById('fStreet').value,
@@ -416,22 +480,27 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 body: JSON.stringify(formData)
             }).then(() => {
                 if (navigator.vibrate) navigator.vibrate([40, 40, 40]);
+                
+                // Прячем форму и шаги, показываем успех
                 form.style.display = 'none';
+                indicator.style.display = 'none';
                 successScreen.style.display = 'block';
                 
-                // Плавное скрытие и очистка
                 setTimeout(() => {
-                    modal.classList.remove('active'); // Анимация скрытия начнется здесь
+                    modal.classList.remove('active');
                     document.body.style.overflow = '';
                     
+                    // Полный сброс формы под капотом
                     setTimeout(() => {
                         form.reset();
-                        inputs.forEach(id => document.getElementById(id).classList.remove('valid', 'invalid'));
+                        allInputs.forEach(id => document.getElementById(id).classList.remove('valid', 'invalid'));
                         form.style.display = 'block';
+                        indicator.style.display = 'flex';
                         successScreen.style.display = 'none';
                         submitBtn.innerText = t.fSubmit;
                         submitBtn.disabled = false;
-                    }, 400); // Очищаем форму только после полного завершения CSS-анимации растворения окна
+                        goToStep(1); // Возвращаем на первый шаг для следующего клиента
+                    }, 400);
                 }, 2000);
 
             }).catch(err => {
