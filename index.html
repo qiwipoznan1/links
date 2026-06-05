@@ -88,7 +88,7 @@ footer {
 }
 .accordion-content.open { opacity: 1; margin-top: 8px; margin-bottom: 4px; }
 
-/* ================= POPUP И ПОШАГОВАЯ ФОРМА ================= */
+/* POPUP И ПОШАГОВАЯ ФОРМА */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
@@ -118,12 +118,10 @@ footer {
 .close-btn { right: -5px; background: #222; }
 .back-btn { left: -5px; display: none; font-size: 16px; color: #FF2E2E; }
 
-/* Индикатор шагов */
 .step-indicator { display: flex; justify-content: center; gap: 6px; margin-bottom: 20px; }
 .dot { width: 6px; height: 6px; border-radius: 50%; background: #333; transition: 0.3s ease; }
 .dot.active { background: #FF2E2E; width: 18px; border-radius: 4px; }
 
-/* Анимация переключения шагов */
 .step-container { animation: slideIn 0.3s ease; }
 @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
 
@@ -139,6 +137,18 @@ footer {
 .form-control.invalid { border-color: #FF2E2E; }
 
 input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+
+/* ХАК ДЛЯ ПЕРМАНЕНТНОГО ПОЛЯ ДАТЫ НА МОБИЛЬНЫХ */
+.date-input-hack { position: relative; }
+.date-input-hack:invalid::-webkit-datetime-edit { color: transparent; }
+.date-input-hack:focus::-webkit-datetime-edit, 
+.date-input-hack:valid::-webkit-datetime-edit { color: #fff; }
+.date-input-hack::before {
+    content: attr(data-placeholder);
+    position: absolute; left: 15px; color: #888; pointer-events: none;
+}
+.date-input-hack:focus::before, 
+.date-input-hack:valid::before { display: none; }
 
 .hidden-honeypot { display: none !important; }
 #successScreen { display: none; text-align: center; padding: 40px 0; }
@@ -204,7 +214,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 <div class="accordion-content">
                     <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
-                    <a href="https://dcp.bolt.eu/courier/signup?fleet=caf288b6-c7c0-4414-9648-9ff18c4c5bfc&utm_source=fleet_portal" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration</a>
+                    <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration</a>
                     <a href="https://apps.apple.com/pl/app/bolt-food-courier/id1470629849" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier</a>
                     <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration</a>
                     <a href="https://apps.apple.com/pl/app/glovo-rider-for-couriers/id6482290018" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider</a>
@@ -224,7 +234,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                     <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber</a>
                     <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn"><img src="icon-uber.png" alt="Uber Maps" class="app-icon"> Uber Maps</a>
                     <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
-                    <a href="https://maps.app.goo.gl/qJXkhcs9A8DVip34A" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
+                    <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
                 </div>
             </div>
         </section>
@@ -232,7 +242,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         <button id="showAll" class="btn" style="display: none;" data-i18n="showAll">Show All Platforms</button>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ПОШАГОВОЙ ФОРМЫ -->
     <div class="modal-overlay" id="formModal">
         <div class="modal-content">
             
@@ -242,7 +251,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 <button type="button" class="close-btn" id="closeFormBtn"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- Индикатор шагов -->
             <div class="step-indicator" id="stepIndicator">
                 <div class="dot active" id="dot1"></div>
                 <div class="dot" id="dot2"></div>
@@ -251,22 +259,16 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             <form id="registrationForm" novalidate>
                 <input type="text" name="botField" id="botField" class="hidden-honeypot" tabindex="-1" autocomplete="off">
                 
-                <!-- ШАГ 1: Личные данные -->
                 <div id="step1Container" class="step-container">
                     <div class="form-group"><input type="text" id="fName" class="form-control" required></div>
                     <div class="form-group"><input type="tel" id="fPhone" class="form-control" required></div>
                     <div class="form-group"><input type="email" id="fEmail" class="form-control" required></div>
                     <div class="form-group"><input type="text" id="fPassport" class="form-control" required></div>
-                    <div class="form-group">
-                        <input type="text" id="fExpiry" class="form-control" 
-                           onfocus="this.type='date'; try { this.showPicker(); } catch(e) {}" 
-                           onblur="if(!this.value) this.type='text'" required>
-                    </div>
+                    <div class="form-group"><input type="date" id="fExpiry" class="form-control date-input-hack" required></div>
                     
                     <button type="button" id="nextStepBtn" class="btn btn-main-cta" style="margin-bottom: 0; width: 100%; border-radius: 12px;" data-i18n="btnNext">NEXT</button>
                 </div>
 
-                <!-- ШАГ 2: Финансы и адрес -->
                 <div id="step2Container" class="step-container" style="display: none;">
                     <div class="form-group"><input type="text" id="fAccount" class="form-control" required></div>
                     <div class="form-group"><input type="text" id="fCity" class="form-control" required></div>
@@ -278,7 +280,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 </div>
             </form>
             
-            <!-- Экран успеха -->
             <div id="successScreen">
                 <i class="fa-solid fa-circle-check"></i>
                 <h3 data-i18n="successMsg">✓ Application submitted!</h3>
@@ -307,14 +308,20 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             if (t[el.getAttribute('data-i18n')]) el.innerText = t[el.getAttribute('data-i18n')];
         });
 
-        // Списки полей разбиты по шагам
         const step1Inputs = ['fName', 'fPhone', 'fEmail', 'fPassport', 'fExpiry'];
         const step2Inputs = ['fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip'];
         const allInputs = [...step1Inputs, ...step2Inputs];
 
         allInputs.forEach(id => {
             const input = document.getElementById(id);
-            if (input && t[id]) input.placeholder = t[id];
+            if (input && t[id]) {
+                if (id === 'fExpiry') {
+                    // Передача плейсхолдера через дата-атрибут для CSS магии
+                    input.setAttribute('data-placeholder', t[id]);
+                } else {
+                    input.placeholder = t[id];
+                }
+            }
         });
 
         // ОПРЕДЕЛЕНИЕ ОС
@@ -381,7 +388,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             return isValid;
         }
 
-        // ================= ПОШАГОВАЯ ЛОГИКА И POPUP =================
+        // ПОШАГОВАЯ ЛОГИКА И POPUP
         const modal = document.getElementById('formModal');
         const form = document.getElementById('registrationForm');
         const successScreen = document.getElementById('successScreen');
@@ -393,24 +400,16 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         const submitBtn = document.getElementById('submitBtn');
         const indicator = document.getElementById('stepIndicator');
 
-        // Функция переключения шагов
         function goToStep(stepNum) {
             if (stepNum === 1) {
-                step2.style.display = 'none';
-                step1.style.display = 'block';
-                backBtn.style.display = 'none';
-                document.getElementById('dot1').classList.add('active');
-                document.getElementById('dot2').classList.remove('active');
+                step2.style.display = 'none'; step1.style.display = 'block'; backBtn.style.display = 'none';
+                document.getElementById('dot1').classList.add('active'); document.getElementById('dot2').classList.remove('active');
             } else {
-                step1.style.display = 'none';
-                step2.style.display = 'block';
-                backBtn.style.display = 'flex';
-                document.getElementById('dot1').classList.remove('active');
-                document.getElementById('dot2').classList.add('active');
+                step1.style.display = 'none'; step2.style.display = 'block'; backBtn.style.display = 'flex';
+                document.getElementById('dot1').classList.remove('active'); document.getElementById('dot2').classList.add('active');
             }
         }
 
-        // Кнопка "ДАЛЕЕ" (Проверка Шага 1)
         nextBtn.addEventListener('click', () => {
             let isStep1Valid = true;
             step1Inputs.forEach(id => {
@@ -426,30 +425,18 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             }
         });
 
-        // Кнопка "НАЗАД"
-        backBtn.addEventListener('click', () => {
-            if (navigator.vibrate) navigator.vibrate(20);
-            goToStep(1);
-        });
+        backBtn.addEventListener('click', () => { if (navigator.vibrate) navigator.vibrate(20); goToStep(1); });
 
-        // Открытие / Закрытие окна
-        document.getElementById('openFormBtn').addEventListener('click', () => { 
-            modal.classList.add('active'); document.body.style.overflow = 'hidden'; 
-        });
-        document.getElementById('closeFormBtn').addEventListener('click', () => { 
-            modal.classList.remove('active'); document.body.style.overflow = ''; 
-        });
-        modal.addEventListener('click', (e) => { 
-            if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } 
-        });
+        document.getElementById('openFormBtn').addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
+        document.getElementById('closeFormBtn').addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = ''; });
+        modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } });
 
-        // ОТПРАВКА ДАННЫХ (Замените ссылку!)
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuYW1QfPkYm0RndDd4FPDZALR1h7OfM6bjt3srLjZgKLTQnMBto1uoY-cjJ7DJwlrudA/exec';
+        // ВАША ССЫЛКА ЗДЕСЬ
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/ВАШ_ДЛИННЫЙ_ИДЕНТИФИКАТОР/exec';
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Проверка Шага 2 перед отправкой
             let isStep2Valid = true;
             step2Inputs.forEach(id => {
                 const input = document.getElementById(id);
@@ -485,32 +472,24 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             }).then(() => {
                 if (navigator.vibrate) navigator.vibrate([40, 40, 40]);
                 
-                // Прячем форму и шаги, показываем успех
-                form.style.display = 'none';
-                indicator.style.display = 'none';
-                successScreen.style.display = 'block';
+                form.style.display = 'none'; indicator.style.display = 'none'; successScreen.style.display = 'block';
                 
                 setTimeout(() => {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
                     
-                    // Полный сброс формы под капотом
                     setTimeout(() => {
                         form.reset();
                         allInputs.forEach(id => document.getElementById(id).classList.remove('valid', 'invalid'));
-                        form.style.display = 'block';
-                        indicator.style.display = 'flex';
-                        successScreen.style.display = 'none';
-                        submitBtn.innerText = t.fSubmit;
-                        submitBtn.disabled = false;
-                        goToStep(1); // Возвращаем на первый шаг для следующего клиента
+                        form.style.display = 'block'; indicator.style.display = 'flex'; successScreen.style.display = 'none';
+                        submitBtn.innerText = t.fSubmit; submitBtn.disabled = false;
+                        goToStep(1);
                     }, 400);
                 }, 2000);
 
             }).catch(err => {
                 alert('Connection error');
-                submitBtn.innerText = t.fSubmit;
-                submitBtn.disabled = false;
+                submitBtn.innerText = t.fSubmit; submitBtn.disabled = false;
             });
         });
 
