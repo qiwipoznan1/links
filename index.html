@@ -204,7 +204,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 <div class="accordion-content">
                     <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
-                    <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration</a>
+                    <a href="https://dcp.bolt.eu/courier/signup?fleet=caf288b6-c7c0-4414-9648-9ff18c4c5bfc&utm_source=fleet_portal" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration</a>
                     <a href="https://apps.apple.com/pl/app/bolt-food-courier/id1470629849" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier</a>
                     <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration</a>
                     <a href="https://apps.apple.com/pl/app/glovo-rider-for-couriers/id6482290018" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider</a>
@@ -257,7 +257,11 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                     <div class="form-group"><input type="tel" id="fPhone" class="form-control" required></div>
                     <div class="form-group"><input type="email" id="fEmail" class="form-control" required></div>
                     <div class="form-group"><input type="text" id="fPassport" class="form-control" required></div>
-                    <div class="form-group"><input type="text" id="fExpiry" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" required></div>
+                    <div class="form-group">
+                        <input type="text" id="fExpiry" class="form-control" 
+                           onfocus="this.type='date'; try { this.showPicker(); } catch(e) {}" 
+                           onblur="if(!this.value) this.type='text'" required>
+                    </div>
                     
                     <button type="button" id="nextStepBtn" class="btn btn-main-cta" style="margin-bottom: 0; width: 100%; border-radius: 12px;" data-i18n="btnNext">NEXT</button>
                 </div>
