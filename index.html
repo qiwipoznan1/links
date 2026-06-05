@@ -13,7 +13,7 @@
 
 body {
     font-family: 'Inter', sans-serif; background-color: #050505; color: white;
-    display: flex; flex-direction: column; align-items: center; position: relative;
+    display: flex; flex-direction: column; position: relative;
     min-height: 100vh; user-select: none; animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -31,11 +31,11 @@ body {
 .wa-btn { background-color: #25D366; }
 
 /* Основной контейнер */
-.container { width: 100%; max-width: 450px; margin: 0 auto; padding: 20px 15px 30px; }
+.container { width: 100%; max-width: 450px; margin: 0 auto; padding: 20px 15px 10px; }
 .logo-container { display: flex; justify-content: center; margin-bottom: 25px; }
 .site-logo { width: 40%; max-width: 180px; height: auto; object-fit: contain; }
 
-/* Кнопки ссылок */
+/* Кнопки ссылок внутри категорий */
 .btn {
     display: flex; align-items: center; justify-content: flex-start; gap: 14px;
     width: 100%; background-color: rgba(30, 30, 30, 0.7); border: 1px solid rgba(255, 255, 255, 0.08);
@@ -55,28 +55,52 @@ body {
 
 .app-icon { width: 32px; height: 32px; border-radius: 7px; object-fit: cover; background-color: #fff; display: block; }
 
-.section-divider { height: 1px; background-color: rgba(255, 255, 255, 0.1); margin: 25px 0; width: 100%; }
-#showAll { display: none; justify-content: center; background-color: transparent; border: 1px solid #FF2E2E; color: #FF2E2E; margin-top: 20px; }
-#showAll:active { background-color: rgba(255, 46, 46, 0.1); }
-footer { text-align: center; margin-top: 30px; color: #555; font-size: 12px; font-weight: 500; }
-
-/* СТИЛИ РАСКРЫВАЕМЫХ КАТЕГОРИЙ */
-.accordion-item { margin-bottom: 8px; }
-.accordion-header {
-    display: flex; justify-content: space-between; align-items: center; font-size: 13px;
-    font-weight: 600; color: #777; text-transform: uppercase; letter-spacing: 1.2px;
-    padding: 14px 10px; cursor: pointer; user-select: none; border-radius: 12px;
-    transition: all 0.2s ease; background: rgba(255, 255, 255, 0.02);
+/* ФУТЕР В САМОМ НИЗУ СТРАНИЦЫ */
+footer {
+    text-align: center; padding: 24px 0; color: #444; font-size: 12px;
+    font-weight: 500; margin-top: auto; width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.02); background-color: #020202;
 }
-.accordion-header:active { background: rgba(255, 255, 255, 0.05); color: #fff; }
-.accordion-header i { font-size: 11px; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); color: #555; }
-.accordion-header.active { color: #fff; }
-.accordion-header.active i { transform: rotate(180deg); color: #FF2E2E; }
+
+/* ================= СОВРЕМЕННЫЙ ДИЗАЙН КНОПОК РАСКРЫВАНИЯ (iOS СТИЛЬ) ================= */
+.accordion-item {
+    margin-bottom: 12px;
+}
+.accordion-header {
+    display: flex; justify-content: space-between; align-items: center; 
+    font-size: 15px; font-weight: 600; color: #efefef;
+    padding: 16px 20px; cursor: pointer; user-select: none; border-radius: 16px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+.accordion-header:active {
+    transform: scale(0.99);
+    background: rgba(255, 255, 255, 0.06);
+}
+/* Минималистичный круглый бадж для стрелочки */
+.accordion-header i {
+    font-size: 12px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    color: #666; background: rgba(255, 255, 255, 0.05);
+    width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+}
+/* Состояние при раскрытии */
+.accordion-header.active {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 46, 46, 0.2);
+    color: #fff;
+}
+.accordion-header.active i {
+    transform: rotate(180deg); color: #FF2E2E;
+    background: rgba(255, 46, 46, 0.1);
+}
 .accordion-content {
-    max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+    max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
     opacity: 0; display: flex; flex-direction: column;
 }
-.accordion-content.open { opacity: 1; margin-top: 8px; margin-bottom: 12px; }
+.accordion-content.open { opacity: 1; margin-top: 8px; margin-bottom: 4px; }
 
 /* POPUP МОДАЛЬНОЕ ОКНО */
 .modal-overlay {
@@ -107,7 +131,6 @@ footer { text-align: center; margin-top: 30px; color: #555; font-size: 12px; fon
 }
 .form-control::placeholder { color: #888; }
 
-/* Цвета валидации (Успех/Ошибка) */
 .form-control:focus { border-color: #777; }
 .form-control.valid { border-color: #25D366; }
 .form-control.invalid { border-color: #FF2E2E; }
@@ -122,7 +145,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
     .container {
         padding-left: max(env(safe-area-inset-left), 15px);
         padding-right: max(env(safe-area-inset-right), 15px);
-        padding-bottom: max(env(safe-area-inset-bottom), 30px);
     }
 }
     </style>
@@ -149,7 +171,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
         <section id="android">
             <div class="accordion-item">
-                <div class="accordion-header"><span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-header">
+                    <span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i>
+                </div>
                 <div class="accordion-content">
                     <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver</a>
@@ -159,7 +183,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             </div>
             
             <div class="accordion-item">
-                <div class="accordion-header"><span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-header">
+                    <span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i>
+                </div>
                 <div class="accordion-content">
                     <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
@@ -173,12 +199,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 </div>
             </div>
         </section>
-
-        <div class="section-divider" data-platform-divider></div>
         
         <section id="ios">
             <div class="accordion-item">
-                <div class="accordion-header"><span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-header">
+                    <span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i>
+                </div>
                 <div class="accordion-content">
                     <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://apps.apple.com/pl/app/bolt-driver-drive-earn/id897442736?l=pl" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver</a>
@@ -188,7 +214,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             </div>
             
             <div class="accordion-item">
-                <div class="accordion-header"><span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-header">
+                    <span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i>
+                </div>
                 <div class="accordion-content">
                     <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
                     <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
@@ -203,23 +231,23 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             </div>
         </section>
 
-        <section>
-            <div class="section-divider"></div>
+        <section style="margin-top: 12px;">
             <div class="accordion-item">
-                <div class="accordion-header"><span data-i18n="verification">VERIFICATION</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-header">
+                    <span data-i18n="verification">VERIFICATION</span> <i class="fa-solid fa-chevron-down"></i>
+                </div>
                 <div class="accordion-content">
                     <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt</a>
                     <a href="https://maps.app.goo.gl/QNipNR8bxNuMhDVV9" class="btn"><img src="icon-bolt.png" alt="Bolt Maps" class="app-icon"> Bolt Maps</a>
                     <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber</a>
                     <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn"><img src="icon-uber.png" alt="Uber Maps" class="app-icon"> Uber Maps</a>
                     <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
-                    <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
+                    <a href="https://maps.app.goo.gl/qJXkhcs9A8DVip34A" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
                 </div>
             </div>
         </section>
 
-        <button id="showAll" class="btn" data-i18n="showAll">Show All Platforms</button>
-        <footer><p>© 2026 QIWI Partner</p></footer>
+        <button id="showAll" class="btn" style="display: none;" data-i18n="showAll">Show All Platforms</button>
     </div>
 
     <div class="modal-overlay" id="formModal">
@@ -251,12 +279,16 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         </div>
     </div>
 
+    <footer>
+        <p>© 2026 QIWI Partner</p>
+    </footer>
+
     <script>
     const dict = {
-        en: { applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", showAll: "Show All Platforms", formTitle: "Registration Form", fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT APPLICATION", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
-        ru: { applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", showAll: "Показать все платформы", formTitle: "Анкета водителя", fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ ЗАЯВКУ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
-        pl: { applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", showAll: "Pokaż wszystkie platformy", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / paszportu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
-        uk: { applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", showAll: "Показати всі платформи", formTitle: "Реєстраційна форма", fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ ЗАЯВКУ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
+        en: { applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", formTitle: "Registration Form", fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT APPLICATION", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
+        ru: { applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", formTitle: "Анкета водителя", fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ ЗАЯВКУ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
+        pl: { applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / pasзportu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
+        uk: { applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", formTitle: "Реєстраційна форма", fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ ЗАЯВКУ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
     };
 
     function initApp() {
@@ -276,17 +308,13 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             if (input && t[id]) input.placeholder = t[id];
         });
 
-        // ЛОГИКА ОС И АККОРДЕОНОВ (без изменений)
+        // ОПРЕДЕЛЕНИЕ ОС
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         const isAndroid = /android/i.test(navigator.userAgent);
-        if (isAndroid) { document.getElementById('ios').style.display = 'none'; document.querySelector('[data-platform-divider]').style.display = 'none'; document.getElementById('showAll').style.display = 'flex'; }
-        else if (isIOS) { document.getElementById('android').style.display = 'none'; document.querySelector('[data-platform-divider]').style.display = 'none'; document.getElementById('showAll').style.display = 'flex'; }
+        if (isAndroid) { document.getElementById('ios').style.display = 'none'; }
+        else if (isIOS) { document.getElementById('android').style.display = 'none'; }
 
-        document.getElementById('showAll').addEventListener('click', function() {
-            document.getElementById('android').style.display = 'block'; document.getElementById('ios').style.display = 'block';
-            document.querySelector('[data-platform-divider]').style.display = 'block'; this.style.display = 'none';
-        });
-
+        // ЛОГИКА РАСКРЫВАЕМЫХ КАТЕГОРИЙ (АККОРДЕОН)
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', function() {
                 const content = this.nextElementSibling;
@@ -296,22 +324,15 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             });
         });
 
-        // ---------------------------------------------------------
         // МАСКИ ВВОДА И ВАЛИДАЦИЯ
-        // ---------------------------------------------------------
-        
-        // Маска для IBAN (группировка по 4 символа)
         const fAccount = document.getElementById('fAccount');
         fAccount.addEventListener('input', function() {
             let val = this.value.replace(/[^\dA-Z]/gi, '').toUpperCase();
-            if (val.length > 2) {
-                val = val.substring(0, 2) + ' ' + val.substring(2).match(/.{1,4}/g)?.join(' ');
-            }
+            if (val.length > 2) { val = val.substring(0, 2) + ' ' + val.substring(2).match(/.{1,4}/g)?.join(' '); }
             this.value = val ? val.trim() : '';
             validateField(this);
         });
 
-        // Маска для почтового индекса (XX-XXX)
         const fZip = document.getElementById('fZip');
         fZip.addEventListener('input', function() {
             let val = this.value.replace(/\D/g, '');
@@ -320,7 +341,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             validateField(this);
         });
 
-        // Привязка валидации ко всем остальным полям при вводе
         inputs.forEach(id => {
             const input = document.getElementById(id);
             if(id !== 'fAccount' && id !== 'fZip') {
@@ -334,10 +354,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             
             switch(input.id) {
                 case 'fName': isValid = val.length >= 3; break;
-                case 'fPhone': isValid = val.replace(/\D/g, '').length >= 9; break; // Минимум 9 цифр
+                case 'fPhone': isValid = val.replace(/\D/g, '').length >= 9; break;
                 case 'fEmail': isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val); break;
                 case 'fPassport': isValid = val.length >= 5; break;
-                case 'fAccount': isValid = val.replace(/\s/g, '').length >= 16; break; // Длина счета
+                case 'fAccount': isValid = val.replace(/\s/g, '').length >= 16; break;
                 case 'fCity': isValid = val.length >= 2; break;
                 case 'fStreet': isValid = val.length >= 2; break;
                 case 'fHouse': isValid = val.length >= 1; break;
@@ -345,22 +365,16 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 case 'fExpiry': isValid = val !== ''; break;
             }
 
-            // Меняем цвет рамки только если пользователь начал вводить текст
             if (val.length > 0) {
-                if (isValid) {
-                    input.classList.remove('invalid'); input.classList.add('valid');
-                } else {
-                    input.classList.remove('valid'); input.classList.add('invalid');
-                }
+                if (isValid) { input.classList.remove('invalid'); input.classList.add('valid'); } 
+                else { input.classList.remove('valid'); input.classList.add('invalid'); }
             } else {
                 input.classList.remove('valid', 'invalid');
             }
             return isValid;
         }
 
-        // ---------------------------------------------------------
-        // ОТПРАВКА И ПОПАП
-        // ---------------------------------------------------------
+        // ОТПРАВКА И МОДАЛЬНОЕ ОКНО
         const modal = document.getElementById('formModal');
         const form = document.getElementById('registrationForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -375,19 +389,15 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Проверка всех полей перед отправкой
             let allValid = true;
             inputs.forEach(id => {
                 const input = document.getElementById(id);
-                if (!validateField(input)) {
-                    input.classList.add('invalid'); // Подсвечиваем пустые/ошибочные поля красным
-                    allValid = false;
-                }
+                if (!validateField(input)) { input.classList.add('invalid'); allValid = false; }
             });
 
             if (!allValid) {
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100]); // Вибрация ошибки
-                return; // Останавливаем отправку
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                return;
             }
 
             submitBtn.innerText = t.fSending;
@@ -412,7 +422,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(formData)
             }).then(() => {
-                if (navigator.vibrate) navigator.vibrate([40, 40, 40]); // Вибрация успеха
+                if (navigator.vibrate) navigator.vibrate([40, 40, 40]);
                 form.style.display = 'none';
                 successScreen.style.display = 'block';
                 
@@ -435,6 +445,11 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 submitBtn.innerText = t.fSubmit;
                 submitBtn.disabled = false;
             });
+        });
+
+        // Тактильный отклик на мессенджеры
+        document.querySelectorAll('a.circle-btn').forEach(link => {
+            link.addEventListener('click', () => { if (navigator.vibrate) navigator.vibrate(40); });
         });
     }
 
