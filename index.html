@@ -125,6 +125,7 @@ footer {
 .step-container { animation: slideIn 0.3s ease; }
 @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
 
+/* СТИЛИ ПОЛЕЙ И ПРЕФИКСА ТЕЛЕФОНА */
 .form-group { margin-bottom: 12px; position: relative; }
 .form-control {
     width: 100%; padding: 14px 15px; border-radius: 12px; border: 1px solid #333;
@@ -135,6 +136,14 @@ footer {
 .form-control:focus { border-color: #777; }
 .form-control.valid { border-color: #25D366; }
 .form-control.invalid { border-color: #FF2E2E; }
+
+/* Кастомный визуальный префикс +48 */
+.phone-prefix {
+    position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+    color: #fff; font-size: 15px; font-weight: 500; pointer-events: none; z-index: 2;
+}
+/* Сдвигаем текст в поле ввода вправо, чтобы он не наезжал на префикс */
+.form-control.with-prefix { padding-left: 55px; }
 
 input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
@@ -261,7 +270,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 
                 <div id="step1Container" class="step-container">
                     <div class="form-group"><input type="text" id="fName" class="form-control" required></div>
-                    <div class="form-group"><input type="tel" id="fPhone" class="form-control" required></div>
+                    
+                    <div class="form-group">
+                        <span class="phone-prefix">+48</span>
+                        <input type="tel" id="fPhone" class="form-control with-prefix" placeholder="123 456 789" required>
+                    </div>
+
                     <div class="form-group"><input type="email" id="fEmail" class="form-control" required></div>
                     <div class="form-group"><input type="text" id="fPassport" class="form-control" required></div>
                     <div class="form-group"><input type="date" id="fExpiry" class="form-control date-input-hack" required></div>
@@ -291,10 +305,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
     <script>
     const dict = {
-        en: { btnNext: "NEXT", applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", formTitle: "Registration Form", fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
-        ru: { btnNext: "ДАЛЕЕ", applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", formTitle: "Анкета", fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
-        pl: { btnNext: "DALEJ", applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
-        uk: { btnNext: "ДАЛІ", applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", formTitle: "Форма", fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
+        en: { btnNext: "NEXT", applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", formTitle: "Registration Form", fName: "Name Surname", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
+        ru: { btnNext: "ДАЛЕЕ", applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", formTitle: "Анкета", fName: "Имя Фамилия", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
+        pl: { btnNext: "DALEJ", applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", formTitle: "Rejestracja", fName: "Imię Nazwisko", fEmail: "Email", fPassport: "Nr dowodu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
+        uk: { btnNext: "ДАЛІ", applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", formTitle: "Форма", fName: "Ім'я Прізвище", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
     };
 
     function initApp() {
@@ -308,17 +322,18 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             if (t[el.getAttribute('data-i18n')]) el.innerText = t[el.getAttribute('data-i18n')];
         });
 
+        // Задаем массивы полей
         const step1Inputs = ['fName', 'fPhone', 'fEmail', 'fPassport', 'fExpiry'];
         const step2Inputs = ['fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip'];
         const allInputs = [...step1Inputs, ...step2Inputs];
 
+        // Заполняем плейсхолдеры из словаря (пропуская телефон, т.к. там жесткий формат)
         allInputs.forEach(id => {
             const input = document.getElementById(id);
             if (input && t[id]) {
                 if (id === 'fExpiry') {
-                    // Передача плейсхолдера через дата-атрибут для CSS магии
                     input.setAttribute('data-placeholder', t[id]);
-                } else {
+                } else if (id !== 'fPhone') {
                     input.placeholder = t[id];
                 }
             }
@@ -340,7 +355,27 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             });
         });
 
-        // МАСКИ ВВОДА
+        // МАСКА ДЛЯ ТЕЛЕФОНА (Строго 9 цифр и пробелы)
+        const fPhone = document.getElementById('fPhone');
+        fPhone.addEventListener('input', function() {
+            let val = this.value.replace(/\D/g, ''); // Удаляем буквы
+            
+            // Если вставили номер сразу с 48 впереди — отрезаем
+            if (val.length > 9 && val.startsWith('48')) {
+                val = val.substring(2);
+            }
+            
+            val = val.substring(0, 9); // Строго 9 цифр
+            
+            // Форматируем пробелами XXX XXX XXX
+            if (val.length > 6) { val = val.substring(0, 3) + ' ' + val.substring(3, 6) + ' ' + val.substring(6, 9); } 
+            else if (val.length > 3) { val = val.substring(0, 3) + ' ' + val.substring(3, 6); }
+            
+            this.value = val;
+            validateField(this);
+        });
+
+        // ДРУГИЕ МАСКИ ВВОДА
         document.getElementById('fAccount').addEventListener('input', function() {
             let val = this.value.replace(/[^\dA-Z]/gi, '').toUpperCase();
             if (val.length > 2) { val = val.substring(0, 2) + ' ' + val.substring(2).match(/.{1,4}/g)?.join(' '); }
@@ -357,7 +392,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
         allInputs.forEach(id => {
             const input = document.getElementById(id);
-            if(id !== 'fAccount' && id !== 'fZip') {
+            if(id !== 'fAccount' && id !== 'fZip' && id !== 'fPhone') {
                 input.addEventListener('input', function() { validateField(this); });
             }
         });
@@ -368,7 +403,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             
             switch(input.id) {
                 case 'fName': isValid = val.length >= 3; break;
-                case 'fPhone': isValid = val.replace(/\D/g, '').length >= 9; break;
+                // Строгая проверка телефона на 9 цифр
+                case 'fPhone': isValid = val.replace(/\D/g, '').length === 9; break;
                 case 'fEmail': isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val); break;
                 case 'fPassport': isValid = val.length >= 5; break;
                 case 'fExpiry': isValid = val !== ''; break;
@@ -453,7 +489,10 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
             const formData = {
                 name: document.getElementById('fName').value,
-                phone: document.getElementById('fPhone').value,
+                
+                // ПРИ ОТПРАВКЕ СКЛЕИВАЕМ +48 И ВВЕДЕННЫЕ ЦИФРЫ
+                phone: '+48 ' + document.getElementById('fPhone').value.trim(),
+                
                 email: document.getElementById('fEmail').value,
                 passport: document.getElementById('fPassport').value,
                 expiry: document.getElementById('fExpiry').value,
