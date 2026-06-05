@@ -489,10 +489,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
             const formData = {
                 name: document.getElementById('fName').value,
-                
-                // ПРИ ОТПРАВКЕ СКЛЕИВАЕМ +48 И ВВЕДЕННЫЕ ЦИФРЫ
-                phone: '+48 ' + document.getElementById('fPhone').value.trim(),
-                
+                phone: document.getElementById('fPhone').value.replace(/\s/g, ''),
                 email: document.getElementById('fEmail').value,
                 passport: document.getElementById('fPassport').value,
                 expiry: document.getElementById('fExpiry').value,
