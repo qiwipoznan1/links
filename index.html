@@ -1,317 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>QIWI Links</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://qiwipartner.pl/wp-content/uploads/2025/03/qiwi-fawicon.svg" sizes="32x32">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
     <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #050505;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    min-height: 100vh;
-    user-select: none;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Плавающие кнопки */
-.floating-top-left, .floating-top-right {
-    position: fixed; 
-    z-index: 1000; 
-    display: flex; 
-    gap: 5px;
-}
-.floating-top-left { top: 15px; left: 15px; }
-.floating-top-right { top: 15px; right: 15px; }
-.circle-btn {
-    width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; text-decoration: none; color: white; font-size: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: transform 0.2s;
-}
-.circle-btn:active { transform: scale(0.92); }
-.form-btn { background-color: #FF2E2E; }
-.tg-btn { background-color: #0088cc; }
-.wa-btn { background-color: #25D366; }
-
-/* Основной контейнер с отступом сверху 20px */
-.container {
-    width: 100%; 
-    max-width: 450px; 
-    margin: 0 auto;
-    padding: 20px 15px 30px; /* padding-top: 20px, left/right: 15px, bottom: 30px */
-}
-
-/* Логотип */
-.logo-container { display: flex; justify-content: center; margin-bottom: 25px; }
-.site-logo { width: 40%; max-width: 180px; height: auto; object-fit: contain; }
-
-/* Заголовки */
-h2 {
-    font-size: 13px; margin-bottom: 8px; margin-top: 22px;
-    font-weight: 600; text-align: left; color: #777;
-    text-transform: uppercase; letter-spacing: 1.2px; padding-left: 5px;
-}
-
-/* Кнопки ссылок */
-.btn {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 14px;
-    width: 100%;
-    background-color: rgba(30, 30, 30, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px 14px;
-    margin-bottom: 7px;
-    border-radius: 16px;
-    font-size: 15px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-}
-
-.btn:active {
-    transform: scale(0.97);
-    background-color: rgba(60, 60, 60, 0.8);
-}
-
-/* Стили для иконок приложений */
-.app-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 7px;
-    object-fit: cover;
-    background-color: #fff;
-    display: block;
-}
-
-/* Разделитель и элементы футера */
-.section-divider { height: 1px; background-color: rgba(255, 255, 255, 0.1); margin: 25px 0; width: 100%; }
-#showAll { display: none; justify-content: center; background-color: transparent; border: 1px solid #FF2E2E; color: #FF2E2E; margin-top: 20px; }
-#showAll:active { background-color: rgba(255, 46, 46, 0.1); }
-footer { text-align: center; margin-top: 30px; color: #555; font-size: 12px; font-weight: 500; }
-
-@supports (padding: max(0px)) {
-    .container {
-        padding-left: max(env(safe-area-inset-left), 15px);
-        padding-right: max(env(safe-area-inset-right), 15px);
-        padding-bottom: max(env(safe-area-inset-bottom), 30px);
-    }
-}
+        /* Базовый минимализм Apple */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .form-container { background: #111; padding: 40px; border-radius: 20px; width: 100%; max-width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        input, select, button { width: 100%; margin-bottom: 15px; padding: 15px; border-radius: 10px; border: none; font-size: 16px; box-sizing: border-box; }
+        input, select { background: #222; color: #fff; }
+        button { background: #e60000; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #cc0000; }
+        .hidden-honeypot { display: none !important; }
+        #successMessage { display: none; text-align: center; color: #4caf50; font-size: 18px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="floating-top-left">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfalqgKy3Nv3dbH6PUOo90T4_aqyhKoBZo5KXgWS9Fl1J7GtA/viewform" class="circle-btn form-btn" target="_blank">
-            <i class="fa-solid fa-file-signature"></i>
-        </a>
-    </div>
+<div class="form-container">
+    <form id="registrationForm">
+        <input type="text" name="botField" id="botField" class="hidden-honeypot" tabindex="-1" autocomplete="off">
 
-    <div class="floating-top-right">
-        <a href="https://t.me/qiwipoznan" class="circle-btn tg-btn" target="_blank">
-            <i class="fa-brands fa-telegram"></i>
-        </a>
-        <a href="https://wa.me/48504407148" class="circle-btn wa-btn" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-    </div>
-
-    <div class="container">
-        <div class="logo-container">
-            <img src="logo.png" alt="Qiwi" class="site-logo" loading="lazy">
-        </div>
-
-        <section id="android">
-            <h2>TAXI</h2>
-            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver" class="btn">
-                <img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=taxi.android.driver" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow
-            </a>
-            
-            <h2>DELIVERY</h2>
-            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.bolt.deliverycourier" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier
-            </a>
-            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.logistics.rider.glovo" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.wolt.courierapp" class="btn">
-                <img src="icon-wolt.png" alt="Wolt" class="app-icon"> Wolt
-            </a>
-            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.stuart.courier" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart
-            </a>
-        </section>
-
-        <div class="section-divider" data-platform-divider></div>
+        <input type="text" id="name" placeholder="Ваше имя" required>
+        <input type="tel" id="phone" placeholder="Номер телефона" required>
         
-        <section id="ios">
-            <h2>TAXI</h2>
-            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://apps.apple.com/pl/app/bolt-driver-drive-earn/id897442736?l=pl" class="btn">
-                <img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver
-            </a>
-            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://apps.apple.com/pl/app/freenow-for-drivers/id1474084363" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow
-            </a>
-            
-            <h2>DELIVERY (iOS)</h2>
-            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/bolt-food-courier/id1470629849" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier
-            </a>
-            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/glovo-rider-for-couriers/id6482290018" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider
-            </a>
-            <a href="https://apps.apple.com/us/app/wolt-courier-partner/id1477299281" class="btn">
-                <img src="icon-wolt.png" alt="Wolt" class="app-icon"> Wolt
-            </a>
-            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/kurierzy-stuart/id1623394133" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart
-            </a>
-        </section>
+        <select id="platform" required>
+            <option value="" id="optDefault" disabled selected>Выберите платформу...</option>
+            <option value="Bolt">Bolt</option>
+            <option value="Uber">Uber</option>
+            <option value="Glovo">Glovo</option>
+        </select>
 
-        <section>
-            <div class="section-divider"></div>
-            <h2>VERIFICATION</h2>
-            <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn">
-                <img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt
-            </a>
-            <a href="https://maps.app.goo.gl/QNipNR8bxNuMhDVV9" class="btn">
-                <img src="icon-bolt.png" alt="Bolt Maps" class="app-icon"> Bolt Maps
-            </a>
-            <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber
-            </a>
-            <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn">
-                <img src="icon-uber.png" alt="Uber Maps" class="app-icon"> Uber Maps
-            </a>
-            <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow
-            </a>
-            <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps
-            </a>
-        </section>
+        <button type="submit" id="submitBtn">ОСТАВИТЬ ЗАЯВКУ</button>
+    </form>
 
-        <button id="showAll" class="btn">Show All Platforms</button>
-
-        <footer>
-            <p>© 2025 QIWI Partner</p>
-        </footer>
+    <div id="successMessage">
+        ✓ Заявка успешно отправлена!
     </div>
+</div>
 
-    <script>
-    function initApp() {
-        const androidSection = document.getElementById('android');
-        const iosSection = document.getElementById('ios');
-        const showAllButton = document.getElementById('showAll');
-        const divider = document.querySelector('[data-platform-divider]');
-        
-        // Определение ОС
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-        const isAndroid = /android/i.test(userAgent);
+<script>
+    // ВСТАВЬТЕ СЮДА ВАШУ ССЫЛКУ ИЗ GOOGLE APPS SCRIPT
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/ВАШ_ДЛИННЫЙ_ИДЕНТИФИКАТОР/exec';
 
-        function hideSection(section) {
-            section.style.display = 'none';
+    // --- СИСТЕМА ЛОКАЛИЗАЦИИ ---
+    const translations = {
+        ru: {
+            title: "Регистрация",
+            namePlace: "Ваше имя",
+            phonePlace: "Номер телефона",
+            selectDefault: "Выберите платформу...",
+            btnSubmit: "ОСТАВИТЬ ЗАЯВКУ",
+            btnSending: "ОТПРАВКА...",
+            successText: "✓ Заявка успешно отправлена!",
+            errSubmit: "Произошла ошибка при отправке. Попробуйте еще раз.",
+            errNet: "Проблема с подключением. Проверьте интернет."
+        },
+        pl: {
+            title: "Rejestracja",
+            namePlace: "Twoje imię",
+            phonePlace: "Numer telefonu",
+            selectDefault: "Wybierz platformę...",
+            btnSubmit: "ZŁÓŻ WNIOSEK",
+            btnSending: "WYSYŁANIE...",
+            successText: "✓ Wniosek został pomyślnie wysłany!",
+            errSubmit: "Wystąpił błąd podczas wysyłania. Spróbuj ponownie.",
+            errNet: "Problem z połączeniem. Sprawdź internet."
         }
-        
-        if (isAndroid) {
-            hideSection(iosSection);
-            if(divider) divider.style.display = 'none';
-            showAllButton.style.display = 'flex';
-        } else if (isIOS) {
-            hideSection(androidSection);
-            if(divider) divider.style.display = 'none';
-            showAllButton.style.display = 'flex';
-        }
-        
-        // Кнопка "Показать всё"
-        showAllButton.addEventListener('click', function() {
-            androidSection.style.display = 'block';
-            iosSection.style.display = 'block';
-            if(divider) divider.style.display = 'block';
-            this.style.display = 'none';
-            if (navigator.vibrate) navigator.vibrate(50);
-        });
+    };
 
-        // Тактильный отклик на кнопки
-        const allLinks = document.querySelectorAll('a.btn, a.circle-btn');
-        allLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (navigator.vibrate) navigator.vibrate(40);
-            });
-        });
+    // Определяем язык браузера (берем первые 2 буквы, например 'ru' из 'ru-RU')
+    let userLang = (navigator.language || navigator.userLanguage).substring(0, 2).toLowerCase();
+    
+    // Если язык не польский, по умолчанию ставим русский
+    if (userLang !== 'pl') {
+        userLang = 'ru';
     }
 
-    document.addEventListener('DOMContentLoaded', initApp);
-    </script>
+    const t = translations[userLang];
+
+    // Применяем переводы к элементам страницы при загрузке
+    document.title = t.title;
+    document.getElementById('name').placeholder = t.namePlace;
+    document.getElementById('phone').placeholder = t.phonePlace;
+    document.getElementById('optDefault').innerText = t.selectDefault;
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.innerText = t.btnSubmit;
+    document.getElementById('successMessage').innerText = t.successText;
+    // ----------------------------
+
+    const form = document.getElementById('registrationForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            platform: document.getElementById('platform').value,
+            botField: document.getElementById('botField').value
+        };
+
+        // Используем переведенный текст для состояния загрузки
+        submitBtn.innerText = t.btnSending;
+        submitBtn.disabled = true;
+
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8',
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.result === "success") {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+            } else {
+                alert(t.errSubmit);
+                submitBtn.innerText = t.btnSubmit;
+                submitBtn.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert(t.errNet);
+            submitBtn.innerText = t.btnSubmit;
+            submitBtn.disabled = false;
+        });
+    });
+</script>
+
 </body>
 </html>
