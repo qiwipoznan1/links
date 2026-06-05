@@ -55,17 +55,15 @@ body {
 
 .app-icon { width: 32px; height: 32px; border-radius: 7px; object-fit: cover; background-color: #fff; display: block; }
 
-/* ФУТЕР В САМОМ НИЗУ СТРАНИЦЫ */
+/* Футер в самом низу страницы */
 footer {
     text-align: center; padding: 24px 0; color: #444; font-size: 12px;
     font-weight: 500; margin-top: auto; width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.02); background-color: #020202;
 }
 
-/* ================= СОВРЕМЕННЫЙ ДИЗАЙН КНОПОК РАСКРЫВАНИЯ (iOS СТИЛЬ) ================= */
-.accordion-item {
-    margin-bottom: 12px;
-}
+/* СОВРЕМЕННЫЙ ДИЗАЙН КНОПОК РАСКРЫВАНИЯ (iOS СТИЛЬ) */
+.accordion-item { margin-bottom: 12px; }
 .accordion-header {
     display: flex; justify-content: space-between; align-items: center; 
     font-size: 15px; font-weight: 600; color: #efefef;
@@ -75,48 +73,42 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
 }
-.accordion-header:active {
-    transform: scale(0.99);
-    background: rgba(255, 255, 255, 0.06);
-}
-/* Минималистичный круглый бадж для стрелочки */
+.accordion-header:active { transform: scale(0.99); background: rgba(255, 255, 255, 0.06); }
 .accordion-header i {
     font-size: 12px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
     color: #666; background: rgba(255, 255, 255, 0.05);
     width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
     border-radius: 50%;
 }
-/* Состояние при раскрытии */
-.accordion-header.active {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 46, 46, 0.2);
-    color: #fff;
-}
-.accordion-header.active i {
-    transform: rotate(180deg); color: #FF2E2E;
-    background: rgba(255, 46, 46, 0.1);
-}
+.accordion-header.active { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 46, 46, 0.2); color: #fff; }
+.accordion-header.active i { transform: rotate(180deg); color: #FF2E2E; background: rgba(255, 46, 46, 0.1); }
 .accordion-content {
     max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
     opacity: 0; display: flex; flex-direction: column;
 }
 .accordion-content.open { opacity: 1; margin-top: 8px; margin-bottom: 4px; }
 
-/* POPUP МОДАЛЬНОЕ ОКНО */
+/* ================= ОБНОВЛЕННЫЙ ПЛАВНЫЙ POPUP (iOS-STYLE ANIMATION) ================= */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
-    z-index: 2000; display: none; justify-content: center; align-items: center;
-    opacity: 0; transition: opacity 0.3s ease;
+    z-index: 2000; display: flex; justify-content: center; align-items: center;
+    /* Управление плавным скрытием и появлением всего оверлея */
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.modal-overlay.active { display: flex; opacity: 1; }
+.modal-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
+
 .modal-content {
     background: #111; padding: 25px; border-radius: 20px;
     width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto;
     position: relative; border: 1px solid rgba(255, 255, 255, 0.1);
-    transform: translateY(30px); transition: transform 0.3s ease;
+    /* Эффект легкого масштабирования и вылета вверх/вниз */
+    transform: scale(0.92) translateY(20px); opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-overlay.active .modal-content { transform: scale(1) translateY(0); opacity: 1; }
+
 .close-btn {
     position: absolute; top: 15px; right: 15px; width: 30px; height: 30px;
     background: #222; border: none; color: #fff; border-radius: 50%;
@@ -142,10 +134,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 #successScreen i { font-size: 50px; color: #25D366; margin-bottom: 15px; }
 
 @supports (padding: max(0px)) {
-    .container {
-        padding-left: max(env(safe-area-inset-left), 15px);
-        padding-right: max(env(safe-area-inset-right), 15px);
-    }
+    .container { padding-left: max(env(safe-area-inset-left), 15px); padding-right: max(env(safe-area-inset-right), 15px); }
 }
     </style>
 </head>
@@ -242,7 +231,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                     <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber</a>
                     <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn"><img src="icon-uber.png" alt="Uber Maps" class="app-icon"> Uber Maps</a>
                     <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
-                    <a href="https://maps.app.goo.gl/qJXkhcs9A8DVip34A" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
+                    <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
                 </div>
             </div>
         </section>
@@ -262,12 +251,14 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 <div class="form-group"><input type="tel" id="fPhone" class="form-control" required></div>
                 <div class="form-group"><input type="email" id="fEmail" class="form-control" required></div>
                 <div class="form-group"><input type="text" id="fPassport" class="form-control" required></div>
+                
+                <div class="form-group"><input type="text" id="fExpiry" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" required></div>
+                
                 <div class="form-group"><input type="text" id="fAccount" class="form-control" required></div>
                 <div class="form-group"><input type="text" id="fCity" class="form-control" required></div>
                 <div class="form-group"><input type="text" id="fStreet" class="form-control" required></div>
                 <div class="form-group"><input type="text" id="fHouse" class="form-control" required></div>
                 <div class="form-group"><input type="text" id="fZip" class="form-control" required></div>
-                <div class="form-group"><input type="text" id="fExpiry" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" required></div>
                 
                 <button type="submit" id="submitBtn" class="btn btn-main-cta" style="margin-bottom: 0; width: 100%; border-radius: 12px;" data-i18n="fSubmit">SUBMIT</button>
             </form>
@@ -287,7 +278,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
     const dict = {
         en: { applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", formTitle: "Registration Form", fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT APPLICATION", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
         ru: { applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", formTitle: "Анкета водителя", fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ ЗАЯВКУ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
-        pl: { applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / pasзportu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
+        pl: { applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / paszportu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
         uk: { applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", formTitle: "Реєстраційна форма", fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ ЗАЯВКУ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
     };
 
@@ -302,7 +293,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             if (t[el.getAttribute('data-i18n')]) el.innerText = t[el.getAttribute('data-i18n')];
         });
 
-        const inputs = ['fName', 'fPhone', 'fEmail', 'fPassport', 'fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip', 'fExpiry'];
+        // Порядок элементов в массиве изменен в соответствии с визуальным расположением
+        const inputs = ['fName', 'fPhone', 'fEmail', 'fPassport', 'fExpiry', 'fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip'];
         inputs.forEach(id => {
             const input = document.getElementById(id);
             if (input && t[id]) input.placeholder = t[id];
@@ -357,12 +349,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 case 'fPhone': isValid = val.replace(/\D/g, '').length >= 9; break;
                 case 'fEmail': isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val); break;
                 case 'fPassport': isValid = val.length >= 5; break;
+                case 'fExpiry': isValid = val !== ''; break;
                 case 'fAccount': isValid = val.replace(/\s/g, '').length >= 16; break;
                 case 'fCity': isValid = val.length >= 2; break;
                 case 'fStreet': isValid = val.length >= 2; break;
                 case 'fHouse': isValid = val.length >= 1; break;
                 case 'fZip': isValid = /^\d{2}-\d{3}$/.test(val); break;
-                case 'fExpiry': isValid = val !== ''; break;
             }
 
             if (val.length > 0) {
@@ -380,6 +372,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         const submitBtn = document.getElementById('submitBtn');
         const successScreen = document.getElementById('successScreen');
 
+        // Плавное открытие/закрытие завязано на класс .active в CSS (opacity + visibility)
         document.getElementById('openFormBtn').addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
         document.getElementById('closeFormBtn').addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = ''; });
         modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } });
@@ -408,12 +401,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 phone: document.getElementById('fPhone').value,
                 email: document.getElementById('fEmail').value,
                 passport: document.getElementById('fPassport').value,
+                expiry: document.getElementById('fExpiry').value, // Передаем корректно
                 account: document.getElementById('fAccount').value,
                 city: document.getElementById('fCity').value,
                 street: document.getElementById('fStreet').value,
                 house: document.getElementById('fHouse').value,
                 zip: document.getElementById('fZip').value,
-                expiry: document.getElementById('fExpiry').value,
                 botField: document.getElementById('botField').value
             };
 
@@ -426,8 +419,9 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 form.style.display = 'none';
                 successScreen.style.display = 'block';
                 
+                // Плавное скрытие и очистка
                 setTimeout(() => {
-                    modal.classList.remove('active');
+                    modal.classList.remove('active'); // Анимация скрытия начнется здесь
                     document.body.style.overflow = '';
                     
                     setTimeout(() => {
@@ -437,7 +431,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                         successScreen.style.display = 'none';
                         submitBtn.innerText = t.fSubmit;
                         submitBtn.disabled = false;
-                    }, 300);
+                    }, 400); // Очищаем форму только после полного завершения CSS-анимации растворения окна
                 }, 2000);
 
             }).catch(err => {
@@ -447,7 +441,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             });
         });
 
-        // Тактильный отклик на мессенджеры
         document.querySelectorAll('a.circle-btn').forEach(link => {
             link.addEventListener('click', () => { if (navigator.vibrate) navigator.vibrate(40); });
         });
