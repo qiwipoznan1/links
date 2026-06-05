@@ -9,40 +9,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #050505;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    min-height: 100vh;
-    user-select: none;
-    animation: fadeIn 0.3s ease-in-out;
+    font-family: 'Inter', sans-serif; background-color: #050505; color: white;
+    display: flex; flex-direction: column; align-items: center; position: relative;
+    min-height: 100vh; user-select: none; animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* Плавающие кнопки мессенджеров справа */
-.floating-top-right {
-    position: fixed; 
-    z-index: 1000; 
-    display: flex; 
-    gap: 5px;
-    top: 15px; 
-    right: 15px;
-}
+.floating-top-right { position: fixed; z-index: 1000; display: flex; gap: 5px; top: 15px; right: 15px; }
 .circle-btn {
     width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center;
     justify-content: center; text-decoration: none; color: white; font-size: 18px;
@@ -53,75 +31,54 @@ body {
 .wa-btn { background-color: #25D366; }
 
 /* Основной контейнер */
-.container {
-    width: 100%; 
-    max-width: 450px; 
-    margin: 0 auto;
-    padding: 20px 15px 30px;
-}
-
-/* Логотип */
+.container { width: 100%; max-width: 450px; margin: 0 auto; padding: 20px 15px 30px; }
 .logo-container { display: flex; justify-content: center; margin-bottom: 25px; }
 .site-logo { width: 40%; max-width: 180px; height: auto; object-fit: contain; }
 
-/* Заголовки */
-h2 {
-    font-size: 13px; margin-bottom: 8px; margin-top: 22px;
-    font-weight: 600; text-align: left; color: #777;
-    text-transform: uppercase; letter-spacing: 1.2px; padding-left: 5px;
-}
-
 /* Кнопки ссылок */
 .btn {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 14px;
-    width: 100%;
-    background-color: rgba(30, 30, 30, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px 14px;
-    margin-bottom: 7px;
-    border-radius: 16px;
-    font-size: 15px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-    cursor: pointer;
+    display: flex; align-items: center; justify-content: flex-start; gap: 14px;
+    width: 100%; background-color: rgba(30, 30, 30, 0.7); border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ffffff; text-decoration: none; padding: 10px 14px; margin-bottom: 7px;
+    border-radius: 16px; font-size: 15px; font-weight: 500; transition: all 0.2s ease;
+    backdrop-filter: blur(10px); cursor: pointer;
 }
-
-.btn:active {
-    transform: scale(0.97);
-    background-color: rgba(60, 60, 60, 0.8);
-}
+.btn:active { transform: scale(0.97); background-color: rgba(60, 60, 60, 0.8); }
 
 /* Главная кнопка открытия формы */
 .btn-main-cta {
-    justify-content: center;
-    background-color: #FF2E2E;
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
-    height: 54px;
-    border: none;
-    margin-bottom: 25px;
+    justify-content: center; background-color: #FF2E2E; color: white;
+    font-weight: 700; font-size: 16px; height: 54px; border: none; margin-bottom: 25px;
     box-shadow: 0 4px 15px rgba(255, 46, 46, 0.3);
 }
 .btn-main-cta:active { background-color: #cc0000; }
 
-.app-icon {
-    width: 32px; height: 32px; border-radius: 7px;
-    object-fit: cover; background-color: #fff; display: block;
-}
+.app-icon { width: 32px; height: 32px; border-radius: 7px; object-fit: cover; background-color: #fff; display: block; }
 
 .section-divider { height: 1px; background-color: rgba(255, 255, 255, 0.1); margin: 25px 0; width: 100%; }
 #showAll { display: none; justify-content: center; background-color: transparent; border: 1px solid #FF2E2E; color: #FF2E2E; margin-top: 20px; }
 #showAll:active { background-color: rgba(255, 46, 46, 0.1); }
 footer { text-align: center; margin-top: 30px; color: #555; font-size: 12px; font-weight: 500; }
 
-/* ================= POPUP МОДАЛЬНОЕ ОКНО ================= */
+/* СТИЛИ РАСКРЫВАЕМЫХ КАТЕГОРИЙ */
+.accordion-item { margin-bottom: 8px; }
+.accordion-header {
+    display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+    font-weight: 600; color: #777; text-transform: uppercase; letter-spacing: 1.2px;
+    padding: 14px 10px; cursor: pointer; user-select: none; border-radius: 12px;
+    transition: all 0.2s ease; background: rgba(255, 255, 255, 0.02);
+}
+.accordion-header:active { background: rgba(255, 255, 255, 0.05); color: #fff; }
+.accordion-header i { font-size: 11px; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); color: #555; }
+.accordion-header.active { color: #fff; }
+.accordion-header.active i { transform: rotate(180deg); color: #FF2E2E; }
+.accordion-content {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+    opacity: 0; display: flex; flex-direction: column;
+}
+.accordion-content.open { opacity: 1; margin-top: 8px; margin-bottom: 12px; }
+
+/* POPUP МОДАЛЬНОЕ ОКНО */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
@@ -142,15 +99,19 @@ footer { text-align: center; margin-top: 30px; color: #555; font-size: 12px; fon
     font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
 .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
-.form-group { margin-bottom: 12px; }
+.form-group { margin-bottom: 12px; position: relative; }
 .form-control {
-    width: 100%; padding: 14px 15px; border-radius: 12px; border: none;
+    width: 100%; padding: 14px 15px; border-radius: 12px; border: 1px solid #333;
     background: #222; color: #fff; font-size: 15px; box-sizing: border-box; outline: none;
+    transition: border-color 0.3s ease;
 }
-.form-control:focus { border: 1px solid #FF2E2E; }
 .form-control::placeholder { color: #888; }
 
-/* Кастомный ввод даты */
+/* Цвета валидации (Успех/Ошибка) */
+.form-control:focus { border-color: #777; }
+.form-control.valid { border-color: #25D366; }
+.form-control.invalid { border-color: #FF2E2E; }
+
 input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
 .hidden-honeypot { display: none !important; }
@@ -187,125 +148,78 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
         </button>
 
         <section id="android">
-            <h2 data-i18n="taxi">TAXI</h2>
-            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver" class="btn">
-                <img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=taxi.android.driver" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow
-            </a>
+            <div class="accordion-item">
+                <div class="accordion-header"><span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
+                    <a href="https://play.google.com/store/apps/details?id=ee.mtakso.driver" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
+                    <a href="https://play.google.com/store/apps/details?id=taxi.android.driver" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
+                </div>
+            </div>
             
-            <h2 data-i18n="delivery">DELIVERY</h2>
-            <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.bolt.deliverycourier" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier
-            </a>
-            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.logistics.rider.glovo" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.wolt.courierapp" class="btn">
-                <img src="icon-wolt.png" alt="Wolt" class="app-icon"> Wolt
-            </a>
-            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart Registration
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.stuart.courier" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart
-            </a>
+            <div class="accordion-item">
+                <div class="accordion-header"><span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <a href="https://play.google.com/store/apps/details?id=com.qiwi_mobile_mvp" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.ubercab.driver" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
+                    <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.bolt.deliverycourier" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier</a>
+                    <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.logistics.rider.glovo" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.wolt.courierapp" class="btn"><img src="icon-wolt.png" alt="Wolt" class="app-icon"> Wolt</a>
+                    <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn"><img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart Registration</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.stuart.courier" class="btn"><img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart</a>
+                </div>
+            </div>
         </section>
 
         <div class="section-divider" data-platform-divider></div>
         
         <section id="ios">
-            <h2 data-i18n="taxi">TAXI</h2>
-            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://apps.apple.com/pl/app/bolt-driver-drive-earn/id897442736?l=pl" class="btn">
-                <img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver
-            </a>
-            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://apps.apple.com/pl/app/freenow-for-drivers/id1474084363" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow
-            </a>
+            <div class="accordion-item">
+                <div class="accordion-header"><span data-i18n="taxi">TAXI</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
+                    <a href="https://apps.apple.com/pl/app/bolt-driver-drive-earn/id897442736?l=pl" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt Driver</a>
+                    <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
+                    <a href="https://apps.apple.com/pl/app/freenow-for-drivers/id1474084363" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
+                </div>
+            </div>
             
-            <h2 data-i18n="delivery">DELIVERY</h2>
-            <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn">
-                <img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App
-            </a>
-            <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver
-            </a>
-            <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/bolt-food-courier/id1470629849" class="btn">
-                <img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier
-            </a>
-            <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/glovo-rider-for-couriers/id6482290018" class="btn">
-                <img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider
-            </a>
-            <a href="https://apps.apple.com/us/app/wolt-courier-partner/id1477299281" class="btn">
-                <img src="icon-wolt.png" alt="Wolt" class="app-icon"> Wolt
-            </a>
-            <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart Registration
-            </a>
-            <a href="https://apps.apple.com/pl/app/kurierzy-stuart/id1623394133" class="btn">
-                <img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart
-            </a>
+            <div class="accordion-item">
+                <div class="accordion-header"><span data-i18n="delivery">DELIVERY</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <a href="https://apps.apple.com/us/app/qiwi-partner/id6741429140" class="btn"><img src="icon-qiwi.png" alt="QIWI" class="app-icon"> QIWI App</a>
+                    <a href="https://apps.apple.com/us/app/uber-driver-drive-deliver/id1131342792" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber Driver</a>
+                    <a href="https://courier.bolt.eu/j8v3l5r2b6z7x4n9fpcl?bolt_utm_source=fleet_portal&fleet_id=17944" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Registration</a>
+                    <a href="https://apps.apple.com/pl/app/bolt-food-courier/id1470629849" class="btn"><img src="icon-boltfood.png" alt="Bolt Food" class="app-icon"> Bolt Food Courier</a>
+                    <a href="https://pl.rider.glovoapp.com/?company=qiwi_partner_pl&utm_source=3pl" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Registration</a>
+                    <a href="https://apps.apple.com/pl/app/glovo-rider-for-couriers/id6482290018" class="btn"><img src="icon-glovo.png" alt="Glovo" class="app-icon"> Glovo Rider</a>
+                    <a href="https://apps.apple.com/us/app/wolt-courier-partner/id1477299281" class="btn"><img src="icon-wolt.png" alt="Wolt" class="app-icon"> Wolt</a>
+                    <a href="https://couriers.stuart.com/pl/zostan-kurierem/" class="btn"><img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart Registration</a>
+                    <a href="https://apps.apple.com/pl/app/kurierzy-stuart/id1623394133" class="btn"><img src="icon-stuart.png" alt="Stuart" class="app-icon"> Stuart</a>
+                </div>
+            </div>
         </section>
 
         <section>
             <div class="section-divider"></div>
-            <h2 data-i18n="verification">VERIFICATION</h2>
-            <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn">
-                <img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt
-            </a>
-            <a href="https://maps.app.goo.gl/QNipNR8bxNuMhDVV9" class="btn">
-                <img src="icon-bolt.png" alt="Bolt Maps" class="app-icon"> Bolt Maps
-            </a>
-            <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn">
-                <img src="icon-uber.png" alt="Uber" class="app-icon"> Uber
-            </a>
-            <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn">
-                <img src="icon-uber.png" alt="Uber Maps" class="app-icon"> Uber Maps
-            </a>
-            <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow
-            </a>
-            <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn">
-                <img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps
-            </a>
+            <div class="accordion-item">
+                <div class="accordion-header"><span data-i18n="verification">VERIFICATION</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="accordion-content">
+                    <a href="https://boltplpok.as.me/schedule/b02a6806/appointment/47732711/calendar/8482411" class="btn"><img src="icon-bolt.png" alt="Bolt" class="app-icon"> Bolt</a>
+                    <a href="https://maps.app.goo.gl/QNipNR8bxNuMhDVV9" class="btn"><img src="icon-bolt.png" alt="Bolt Maps" class="app-icon"> Bolt Maps</a>
+                    <a href="https://help.uber.com/pl-PL/driving-and-delivering/article/proces-weryfikacji-kierowcy?nodeId=02698576-e3c8-4ff5-ac6e-07d8e7b35b76" class="btn"><img src="icon-uber.png" alt="Uber" class="app-icon"> Uber</a>
+                    <a href="https://maps.app.goo.gl/BLLP2jXervurgV6p6" class="btn"><img src="icon-uber.png" alt="Uber Maps" class="app-icon"> Uber Maps</a>
+                    <a href="https://freenow.as.me/schedule/8eed0ddb/appointment/48143712/calendar/8716169" class="btn"><img src="icon-freenow.png" alt="FreeNow" class="app-icon"> FreeNow</a>
+                    <a href="https://maps.app.goo.gl/PSHfoh5Er4wSznfP7" class="btn"><img src="icon-freenow.png" alt="FreeNow Maps" class="app-icon"> FreeNow Maps</a>
+                </div>
+            </div>
         </section>
 
         <button id="showAll" class="btn" data-i18n="showAll">Show All Platforms</button>
-
-        <footer>
-            <p>© 2026 QIWI Partner</p>
-        </footer>
+        <footer><p>© 2026 QIWI Partner</p></footer>
     </div>
 
     <div class="modal-overlay" id="formModal">
@@ -313,7 +227,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
             <button class="close-btn" id="closeFormBtn"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="modal-title" data-i18n="formTitle">Registration</h3>
             
-            <form id="registrationForm">
+            <form id="registrationForm" novalidate>
                 <input type="text" name="botField" id="botField" class="hidden-honeypot" tabindex="-1" autocomplete="off">
                 
                 <div class="form-group"><input type="text" id="fName" class="form-control" required></div>
@@ -325,9 +239,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 <div class="form-group"><input type="text" id="fStreet" class="form-control" required></div>
                 <div class="form-group"><input type="text" id="fHouse" class="form-control" required></div>
                 <div class="form-group"><input type="text" id="fZip" class="form-control" required></div>
-                <div class="form-group">
-                    <input type="text" id="fExpiry" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" required>
-                </div>
+                <div class="form-group"><input type="text" id="fExpiry" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" required></div>
                 
                 <button type="submit" id="submitBtn" class="btn btn-main-cta" style="margin-bottom: 0; width: 100%; border-radius: 12px;" data-i18n="fSubmit">SUBMIT</button>
             </form>
@@ -340,113 +252,144 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
     </div>
 
     <script>
-    // --- 1. СЛОВАРЬ ПЕРЕВОДОВ ---
     const dict = {
-        en: {
-            applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION",
-            showAll: "Show All Platforms", formTitle: "Registration Form",
-            fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number",
-            fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number",
-            fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT APPLICATION",
-            fSending: "SENDING...", successMsg: "Application successfully submitted!"
-        },
-        ru: {
-            applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ",
-            showAll: "Показать все платформы", formTitle: "Анкета водителя",
-            fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта",
-            fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома",
-            fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ ЗАЯВКУ",
-            fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!"
-        },
-        pl: {
-            applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA",
-            showAll: "Pokaż wszystkie platformy", formTitle: "Rejestracja",
-            fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / paszportu",
-            fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku",
-            fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK",
-            fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!"
-        },
-        uk: {
-            applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ",
-            showAll: "Показати всі платформи", formTitle: "Реєстраційна форма",
-            fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта",
-            fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку",
-            fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ ЗАЯВКУ",
-            fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!"
-        }
+        en: { applyBtn: "REGISTER", taxi: "TAXI", delivery: "DELIVERY", verification: "VERIFICATION", showAll: "Show All Platforms", formTitle: "Registration Form", fName: "Name Surname", fPhone: "Phone Number", fEmail: "Email", fPassport: "Passport number", fAccount: "Bank account (IBAN)", fCity: "City", fStreet: "Street", fHouse: "House number", fZip: "Postal code", fExpiry: "Passport expiry date", fSubmit: "SUBMIT APPLICATION", fSending: "SENDING...", successMsg: "Application successfully submitted!" },
+        ru: { applyBtn: "ОФОРМИТЬ ЗАЯВКУ", taxi: "ТАКСИ", delivery: "ДОСТАВКА", verification: "ВЕРИФИКАЦИЯ", showAll: "Показать все платформы", formTitle: "Анкета водителя", fName: "Имя Фамилия", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер счета (IBAN)", fCity: "Город", fStreet: "Улица", fHouse: "Номер дома", fZip: "Почтовый индекс", fExpiry: "Срок действия паспорта", fSubmit: "ОТПРАВИТЬ ЗАЯВКУ", fSending: "ОТПРАВКА...", successMsg: "Заявка успешно отправлена!" },
+        pl: { applyBtn: "ZŁÓŻ WNIOSEK", taxi: "TAXI", delivery: "DOSTAWA", verification: "WERYFIKACJA", showAll: "Pokaż wszystkie platformy", formTitle: "Rejestracja", fName: "Imię Nazwisko", fPhone: "Telefon", fEmail: "Email", fPassport: "Nr dowodu / paszportu", fAccount: "Numer konta", fCity: "Miasto", fStreet: "Ulica", fHouse: "Numer budynku", fZip: "Kod pocztowy", fExpiry: "Data ważności dokumentu", fSubmit: "WYŚLIJ WNIOSEK", fSending: "WYSYŁANIE...", successMsg: "Wniosek został pomyślnie wysłany!" },
+        uk: { applyBtn: "ПОДАТИ ЗАЯВКУ", taxi: "ТАКСІ", delivery: "ДОСТАВКА", verification: "ВЕРИФІКАЦІЯ", showAll: "Показати всі платформи", formTitle: "Реєстраційна форма", fName: "Ім'я Прізвище", fPhone: "Телефон", fEmail: "Email", fPassport: "Номер паспорта", fAccount: "Номер рахунку (IBAN)", fCity: "Місто", fStreet: "Вулиця", fHouse: "Номер будинку", fZip: "Поштовий індекс", fExpiry: "Термін дії паспорта", fSubmit: "ВІДПРАВИТИ ЗАЯВКУ", fSending: "ВІДПРАВЛЕННЯ...", successMsg: "Заявку успішно відправлено!" }
     };
 
     function initApp() {
-        // --- 2. ОПРЕДЕЛЕНИЕ ЯЗЫКА И ПЕРЕВОД ---
         let lang = (navigator.language || navigator.userLanguage).substring(0, 2).toLowerCase();
         if (!['ru', 'pl', 'en', 'uk'].includes(lang)) lang = 'en'; 
         if (lang === 'be') lang = 'ru'; 
 
         const t = dict[lang];
 
-        // Перевод текстовых блоков
         document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (t[key]) el.innerText = t[key];
+            if (t[el.getAttribute('data-i18n')]) el.innerText = t[el.getAttribute('data-i18n')];
         });
 
-        // Перевод плейсхолдеров в форме
-        ['fName', 'fPhone', 'fEmail', 'fPassport', 'fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip', 'fExpiry'].forEach(id => {
+        const inputs = ['fName', 'fPhone', 'fEmail', 'fPassport', 'fAccount', 'fCity', 'fStreet', 'fHouse', 'fZip', 'fExpiry'];
+        inputs.forEach(id => {
             const input = document.getElementById(id);
             if (input && t[id]) input.placeholder = t[id];
         });
 
-        // --- 3. ЛОГИКА ОТОБРАЖЕНИЯ ОС ---
-        const androidSection = document.getElementById('android');
-        const iosSection = document.getElementById('ios');
-        const showAllButton = document.getElementById('showAll');
-        const divider = document.querySelector('[data-platform-divider]');
-        
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-        const isAndroid = /android/i.test(userAgent);
+        // ЛОГИКА ОС И АККОРДЕОНОВ (без изменений)
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /android/i.test(navigator.userAgent);
+        if (isAndroid) { document.getElementById('ios').style.display = 'none'; document.querySelector('[data-platform-divider]').style.display = 'none'; document.getElementById('showAll').style.display = 'flex'; }
+        else if (isIOS) { document.getElementById('android').style.display = 'none'; document.querySelector('[data-platform-divider]').style.display = 'none'; document.getElementById('showAll').style.display = 'flex'; }
 
-        if (isAndroid) {
-            iosSection.style.display = 'none';
-            if(divider) divider.style.display = 'none';
-            showAllButton.style.display = 'flex';
-        } else if (isIOS) {
-            androidSection.style.display = 'none';
-            if(divider) divider.style.display = 'none';
-            showAllButton.style.display = 'flex';
+        document.getElementById('showAll').addEventListener('click', function() {
+            document.getElementById('android').style.display = 'block'; document.getElementById('ios').style.display = 'block';
+            document.querySelector('[data-platform-divider]').style.display = 'block'; this.style.display = 'none';
+        });
+
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                this.classList.toggle('active'); content.classList.toggle('open');
+                content.style.maxHeight = content.classList.contains('open') ? content.scrollHeight + "px" : "0px";
+                if (navigator.vibrate) navigator.vibrate(30);
+            });
+        });
+
+        // ---------------------------------------------------------
+        // МАСКИ ВВОДА И ВАЛИДАЦИЯ
+        // ---------------------------------------------------------
+        
+        // Маска для IBAN (группировка по 4 символа)
+        const fAccount = document.getElementById('fAccount');
+        fAccount.addEventListener('input', function() {
+            let val = this.value.replace(/[^\dA-Z]/gi, '').toUpperCase();
+            if (val.length > 2) {
+                val = val.substring(0, 2) + ' ' + val.substring(2).match(/.{1,4}/g)?.join(' ');
+            }
+            this.value = val ? val.trim() : '';
+            validateField(this);
+        });
+
+        // Маска для почтового индекса (XX-XXX)
+        const fZip = document.getElementById('fZip');
+        fZip.addEventListener('input', function() {
+            let val = this.value.replace(/\D/g, '');
+            if (val.length > 2) { val = val.substring(0, 2) + '-' + val.substring(2, 5); }
+            this.value = val;
+            validateField(this);
+        });
+
+        // Привязка валидации ко всем остальным полям при вводе
+        inputs.forEach(id => {
+            const input = document.getElementById(id);
+            if(id !== 'fAccount' && id !== 'fZip') {
+                input.addEventListener('input', function() { validateField(this); });
+            }
+        });
+
+        function validateField(input) {
+            let isValid = false;
+            const val = input.value.trim();
+            
+            switch(input.id) {
+                case 'fName': isValid = val.length >= 3; break;
+                case 'fPhone': isValid = val.replace(/\D/g, '').length >= 9; break; // Минимум 9 цифр
+                case 'fEmail': isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val); break;
+                case 'fPassport': isValid = val.length >= 5; break;
+                case 'fAccount': isValid = val.replace(/\s/g, '').length >= 16; break; // Длина счета
+                case 'fCity': isValid = val.length >= 2; break;
+                case 'fStreet': isValid = val.length >= 2; break;
+                case 'fHouse': isValid = val.length >= 1; break;
+                case 'fZip': isValid = /^\d{2}-\d{3}$/.test(val); break;
+                case 'fExpiry': isValid = val !== ''; break;
+            }
+
+            // Меняем цвет рамки только если пользователь начал вводить текст
+            if (val.length > 0) {
+                if (isValid) {
+                    input.classList.remove('invalid'); input.classList.add('valid');
+                } else {
+                    input.classList.remove('valid'); input.classList.add('invalid');
+                }
+            } else {
+                input.classList.remove('valid', 'invalid');
+            }
+            return isValid;
         }
-        
-        showAllButton.addEventListener('click', function() {
-            androidSection.style.display = 'block';
-            iosSection.style.display = 'block';
-            if(divider) divider.style.display = 'block';
-            this.style.display = 'none';
-            if (navigator.vibrate) navigator.vibrate(50);
-        });
 
-        const allLinks = document.querySelectorAll('a.btn, a.circle-btn, button.btn');
-        allLinks.forEach(link => {
-            link.addEventListener('click', () => { if (navigator.vibrate) navigator.vibrate(40); });
-        });
-
-        // --- 4. ЛОГИКА POPUP ФОРМЫ ---
+        // ---------------------------------------------------------
+        // ОТПРАВКА И ПОПАП
+        // ---------------------------------------------------------
         const modal = document.getElementById('formModal');
-        const openBtn = document.getElementById('openFormBtn');
-        const closeBtn = document.getElementById('closeFormBtn');
         const form = document.getElementById('registrationForm');
         const submitBtn = document.getElementById('submitBtn');
         const successScreen = document.getElementById('successScreen');
 
-        // Открытие/закрытие модального окна
-        openBtn.addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
-        closeBtn.addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = ''; });
+        document.getElementById('openFormBtn').addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
+        document.getElementById('closeFormBtn').addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = ''; });
         modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } });
 
-        // Отправка данных (Вставьте вашу ссылку из Google Apps Script вместо заглушки)
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzjt3iF5p2dND0ZfjkDhVQRIVapwhM5KfBPMQvFUhBcqo9wv8hGl230_F5O2Lj251O83A/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzcPQiKxO4NzhAM3b9sd6xlxNqq2a9CSmpVTg-cUfZ5xF4AGkIMXXk8PkkqiNjG_q9I-A/exec';
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            // Проверка всех полей перед отправкой
+            let allValid = true;
+            inputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (!validateField(input)) {
+                    input.classList.add('invalid'); // Подсвечиваем пустые/ошибочные поля красным
+                    allValid = false;
+                }
+            });
+
+            if (!allValid) {
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]); // Вибрация ошибки
+                return; // Останавливаем отправку
+            }
+
             submitBtn.innerText = t.fSending;
             submitBtn.disabled = true;
 
@@ -455,25 +398,40 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
                 phone: document.getElementById('fPhone').value,
                 email: document.getElementById('fEmail').value,
                 passport: document.getElementById('fPassport').value,
-                expiry: document.getElementById('fExpiry').value,
                 account: document.getElementById('fAccount').value,
                 city: document.getElementById('fCity').value,
                 street: document.getElementById('fStreet').value,
                 house: document.getElementById('fHouse').value,
                 zip: document.getElementById('fZip').value,
+                expiry: document.getElementById('fExpiry').value,
                 botField: document.getElementById('botField').value
             };
 
             fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
+                method: 'POST', mode: 'no-cors',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(formData)
             }).then(() => {
+                if (navigator.vibrate) navigator.vibrate([40, 40, 40]); // Вибрация успеха
                 form.style.display = 'none';
                 successScreen.style.display = 'block';
+                
+                setTimeout(() => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    setTimeout(() => {
+                        form.reset();
+                        inputs.forEach(id => document.getElementById(id).classList.remove('valid', 'invalid'));
+                        form.style.display = 'block';
+                        successScreen.style.display = 'none';
+                        submitBtn.innerText = t.fSubmit;
+                        submitBtn.disabled = false;
+                    }, 300);
+                }, 2000);
+
             }).catch(err => {
-                alert('Connection error / Error link');
+                alert('Connection error');
                 submitBtn.innerText = t.fSubmit;
                 submitBtn.disabled = false;
             });
