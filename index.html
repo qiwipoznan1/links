@@ -392,6 +392,17 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
 
         allInputs.forEach(id => {
             const input = document.getElementById(id);
+            
+            // --- НОВОЕ: Блокировка кириллицы (оставляем только латиницу) ---
+            if (['fName', 'fPassport', 'fCity', 'fStreet', 'fHouse', 'fEmail'].includes(id)) {
+                input.addEventListener('input', function() {
+                    // Оставляем латинские буквы, польские символы, цифры и знаки препинания. 
+                    // Все остальные (включая кириллицу) мгновенно удаляются.
+                    this.value = this.value.replace(/[^a-zA-Z0-9\sąćęłńóśźżĄĆĘŁŃÓŚŹŻ.,@\-\/\_']/g, '');
+                });
+            }
+
+            // Стандартная валидация
             if(id !== 'fAccount' && id !== 'fZip' && id !== 'fPhone') {
                 input.addEventListener('input', function() { validateField(this); });
             }
